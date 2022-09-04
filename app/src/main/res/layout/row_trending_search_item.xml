@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tv_search"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?selectableItemBackground"
+    android:drawablePadding="@dimen/padding_16"
+    android:gravity="center_vertical"
+    android:paddingHorizontal="@dimen/padding_16"
+    android:paddingVertical="@dimen/padding_12"
+    android:text="@string/dummy_event"
+    android:textColor="?attr/colorOnPrimary"
+    app:drawableStartCompat="@drawable/ic_round_trending_up_24"
+    app:drawableTint="@color/purple_400" />

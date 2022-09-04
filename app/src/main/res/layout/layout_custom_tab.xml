@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_tab_label"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_custom_tab_unselected"
+    android:paddingHorizontal="@dimen/padding_12"
+    android:paddingVertical="@dimen/padding_4"
+    android:text="@string/paid"
+    android:textAllCaps="true"
+    android:textStyle="bold"
+    android:textColor="@color/purple_400"
+    android:textSize="@dimen/text_size_10" />

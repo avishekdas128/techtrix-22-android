@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:minWidth="110dp"
+    android:layout_height="80dp"
+    android:layout_marginEnd="@dimen/margin_12"
+    android:background="@drawable/bg_rounded_category"
+    android:gravity="center_vertical">
+
+    <ImageView
+        android:id="@+id/iv_category_icon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_outline_sports_esports_24"
+        app:tint="@color/white"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tv_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_category_icon"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_4"
+        android:layout_marginHorizontal="@dimen/margin_12"
+        android:letterSpacing="0.1"
+        android:text="@string/dummy_category"
+        android:textAllCaps="true"
+        android:textSize="@dimen/text_size_12"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

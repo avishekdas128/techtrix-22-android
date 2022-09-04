@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.orangeink.techtrix.util.view.SwipeToRefresh xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sw_home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".home.ui.fragments.DashboardFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_countdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:letterSpacing="0.2"
+                android:text="@string/countdown"
+                android:textAllCaps="true"
+                android:textSize="@dimen/text_size_13" />
+
+            <cn.iwgang.countdownview.CountdownView
+                android:id="@+id/countdown_timer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_countdown"
+                android:layout_marginHorizontal="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_12"
+                app:isHideTimeBackground="false"
+                app:isShowDay="true"
+                app:isShowHour="true"
+                app:isShowMillisecond="true"
+                app:isShowMinute="true"
+                app:isShowSecond="true"
+                app:isShowTimeBgDivisionLine="true"
+                app:isTimeTextBold="true"
+                app:suffixTextSize="@dimen/text_size_16"
+                app:timeBgColor="?attr/colorSecondaryVariant"
+                app:timeBgDivisionLineColor="?attr/colorSecondary"
+                app:timeBgRadius="@dimen/radius_5"
+                app:timeBgSize="55dp"
+                app:timeTextColor="?attr/colorOnSecondary"
+                app:timeTextSize="@dimen/text_size_24" />
+
+            <TextView
+                android:id="@+id/tv_flagship"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/countdown_timer"
+                android:layout_marginHorizontal="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:letterSpacing="0.2"
+                android:text="@string/flagship_events"
+                android:textAllCaps="true"
+                android:textSize="@dimen/text_size_13" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_carousel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_flagship"
+                android:layout_marginHorizontal="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_12"
+                app:cardCornerRadius="@dimen/radius_10">
+
+                <com.aemerse.slider.ImageCarousel
+                    android:id="@+id/carousel"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    app:autoPlay="true"
+                    app:autoPlayDelay="3000"
+                    app:autoWidthFixing="true"
+                    app:imagePlaceholder="@color/white_200"
+                    app:imageScaleType="fitXY"
+                    app:infiniteCarousel="true"
+                    app:scaleOnScroll="false"
+                    app:showCaption="false"
+                    app:showIndicator="true"
+                    app:showNavigationButtons="false"
+                    app:touchToPause="true" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/tv_categories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cv_carousel"
+                android:layout_marginHorizontal="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:letterSpacing="0.2"
+                android:text="@string/categories"
+                android:textAllCaps="true"
+                android:textSize="@dimen/text_size_13" />
+
+            <FrameLayout
+                android:id="@+id/frame_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_categories">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_categories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_12"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="@dimen/padding_16"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/row_category_item" />
+
+                <LinearLayout
+                    android:id="@+id/ll_loader_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_12"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="110dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/bg_rounded_category"
+                        android:backgroundTint="?colorSecondary" />
+
+                    <View
+                        android:layout_width="110dp"
+                        android:layout_height="80dp"
+                        android:layout_marginHorizontal="@dimen/margin_12"
+                        android:background="@drawable/bg_rounded_category"
+                        android:backgroundTint="?colorSecondary" />
+
+                    <View
+                        android:layout_width="110dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/bg_rounded_category"
+                        android:backgroundTint="?colorSecondary" />
+
+                    <View
+                        android:layout_width="110dp"
+                        android:layout_height="80dp"
+                        android:layout_marginStart="@dimen/margin_12"
+                        android:background="@drawable/bg_rounded_category"
+                        android:backgroundTint="?colorSecondary" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_popular_event"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/frame_category"
+                android:layout_marginHorizontal="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tv_popular_events"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@id/tv_show_all_events"
+                    android:letterSpacing="0.2"
+                    android:text="@string/popular_events"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/text_size_13" />
+
+                <TextView
+                    android:id="@+id/tv_show_all_events"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/show_all"
+                    android:textColor="@color/purple_400"
+                    android:textSize="@dimen/text_size_12" />
+
+            </RelativeLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_popular_event">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_popular_events"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_8"
+                    android:layout_marginTop="@dimen/margin_12"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
+                    android:paddingBottom="@dimen/padding_16"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="2" />
+
+                <LinearLayout
+                    android:id="@+id/ll_loader_popular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_12"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:layout_marginEnd="@dimen/margin_8"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_rounded_category"
+                        android:backgroundTint="?colorSecondary" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:layout_marginStart="@dimen/margin_8"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_rounded_category"
+                        android:backgroundTint="?colorSecondary" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <ProgressBar
+                android:id="@+id/progress_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:elevation="10dp"
+                android:indeterminateTint="@color/purple_400" />
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</com.orangeink.techtrix.util.view.SwipeToRefresh>

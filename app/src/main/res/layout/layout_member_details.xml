@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_12"
+        android:gravity="center_vertical"
+        android:text="@string/team_name"
+        android:textColor="?colorOnPrimary"
+        android:textSize="@dimen/text_size_12" />
+
+    <EditText
+        android:id="@+id/et_member_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8"
+        android:background="@drawable/bg_edit_text"
+        android:gravity="center_vertical"
+        android:hint="@string/dummy_email"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:paddingHorizontal="@dimen/padding_12"
+        android:paddingVertical="@dimen/padding_8"
+        android:textColor="?colorOnPrimary"
+        android:textCursorDrawable="@null"
+        android:textSize="@dimen/text_size_12" />
+
+</LinearLayout>

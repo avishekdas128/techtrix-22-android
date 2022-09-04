@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/margin_12"
+    android:background="@drawable/bg_bottom_sheet"
+    android:backgroundTint="?colorSurface"
+    android:paddingHorizontal="@dimen/padding_16"
+    android:paddingBottom="32dp">
+
+    <View
+        android:id="@+id/handle"
+        android:layout_width="25dp"
+        android:layout_height="@dimen/padding_4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_8"
+        android:background="@drawable/bg_rounded_secondary"
+        android:backgroundTint="?colorSecondaryVariant" />
+
+    <ImageView
+        android:id="@+id/iv_qr_code"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_below="@id/handle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:src="?colorSecondaryVariant"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tv_password_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_qr_code"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="32dp"
+        android:gravity="center"
+        android:text="@string/qr_info"
+        android:textColor="?colorOnPrimary"
+        android:textSize="@dimen/text_size_18" />
+
+</RelativeLayout>

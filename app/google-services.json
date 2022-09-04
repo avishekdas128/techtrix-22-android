@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "129159196199",
+    "project_id": "techtrix-22",
+    "storage_bucket": "techtrix-22.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:129159196199:android:2065e5443a2e106a2fe802",
+        "android_client_info": {
+          "package_name": "com.orangeink.techtrix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "129159196199-1bbdbcte7ft38o8qbmfgfvq19mhduje6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.orangeink.techtrix",
+            "certificate_hash": "97b1c19944a1dc78ce212ba0a243006cb5d71603"
+          }
+        },
+        {
+          "client_id": "129159196199-buus42eevd7mv7u9tn8rqh1foev9k1g8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDooX38XCvM_VbwoMiidfCFs_eCLKMURf0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "129159196199-buus42eevd7mv7u9tn8rqh1foev9k1g8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

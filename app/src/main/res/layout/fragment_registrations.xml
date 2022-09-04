@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".registrations.ui.fragments.RegistrationsFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorSecondary"
+        android:elevation="@dimen/padding_4">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_qr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="@dimen/margin_16"
+                android:background="?selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_round_qr_code_2_24"
+                android:visibility="gone"
+                app:tint="?attr/colorOnPrimary"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tv_heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@id/iv_qr"
+                android:drawablePadding="@dimen/padding_8"
+                android:includeFontPadding="false"
+                android:text="@string/registrations"
+                android:textColor="?attr/colorOnPrimary"
+                android:textSize="@dimen/text_size_18" />
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/tv_reg_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:background="?attr/colorSecondaryVariant"
+        android:drawablePadding="@dimen/padding_8"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/padding_16"
+        android:paddingVertical="@dimen/padding_8"
+        android:text="@string/registration_info"
+        android:textColor="?attr/colorOnPrimary"
+        android:textSize="@dimen/text_size_10"
+        app:drawableStartCompat="@drawable/ic_outline_info_24"
+        app:drawableTint="?attr/colorOnPrimary" />
+
+    <include
+        android:id="@+id/layout_empty"
+        layout="@layout/layout_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+    <ProgressBar
+        android:id="@+id/progress_registrations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="@color/purple_400" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/rl_registrations"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tv_reg_info"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:paddingBottom="24dp"
+        android:scrollbars="none"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rl_general_fees"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginHorizontal="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:visibility="gone"
+                android:background="@drawable/bg_rounded_event">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="-20dp"
+                    android:scaleType="centerCrop"
+                    android:scaleX="1.3"
+                    android:scaleY="1.3"
+                    android:src="@drawable/logo"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/tv_paid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:layout_marginEnd="@dimen/margin_12"
+                    android:background="@drawable/bg_rounded_secondary"
+                    android:gravity="center_vertical"
+                    android:letterSpacing="0.1"
+                    android:paddingHorizontal="@dimen/padding_8"
+                    android:paddingVertical="@dimen/padding_2"
+                    android:text="@string/paid"
+                    android:textAllCaps="true"
+                    android:textColor="@color/purple_400"
+                    android:textSize="@dimen/text_size_10"
+                    android:textStyle="bold"
+                    tools:ignore="RelativeOverlap" />
+
+                <TextView
+                    android:id="@+id/tv_general_fees"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/tv_general_fees_price"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/margin_12"
+                    android:letterSpacing="0.15"
+                    android:text="@string/general_fees"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_16"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_general_fees_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="@dimen/margin_12"
+                    android:layout_marginBottom="@dimen/margin_8"
+                    android:text="@string/rs_20"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_14" />
+
+            </RelativeLayout>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@id/rl_general_fees"
+                android:layout_marginHorizontal="@dimen/margin_12"
+                android:layout_marginTop="@dimen/margin_16"
+                android:layout_marginBottom="@dimen/margin_4"
+                android:requiresFadingEdge="horizontal"
+                app:tabGravity="fill"
+                app:tabIndicator="@null"
+                app:tabIndicatorFullWidth="false"
+                app:tabMinWidth="0dp"
+                app:tabMode="scrollable"
+                app:tabPaddingEnd="@dimen/padding_4"
+                app:tabPaddingStart="@dimen/padding_4"
+                app:tabRippleColor="@null" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/registrations_vp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/tab_layout"
+                android:overScrollMode="never" />
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>
