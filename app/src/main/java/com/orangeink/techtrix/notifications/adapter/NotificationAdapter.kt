@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.orangeink.techtrix.R
 import com.orangeink.techtrix.databinding.RowNotificationItemBinding
 import com.orangeink.techtrix.notifications.data.model.Notification
-import com.orangeink.techtrix.util.formatDate
+import com.orangeink.utils.formatDate
 
 class NotificationAdapter(
     private val mList: List<Notification>
@@ -36,7 +36,7 @@ class NotificationAdapter(
             item.apply {
                 binding.tvTitle.text = item.title
                 binding.tvDescription.text = item.description
-                binding.tvDate.text = item.Id?.formatDate()
+                binding.tvDate.text = item.Id?.let { formatDate(it) }
             }
         }
 

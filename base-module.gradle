@@ -33,8 +33,7 @@ android {
 }
 
 dependencies {
-    kapt Hilt.android
-    implementation Hilt.compiler
+    implementation External.timber
 
     implementation Testing.junit4
     implementation Testing.junitAndroidExt

@@ -22,6 +22,6 @@ class RegistrationPagerAdapter(
 
     override fun getItemCount(): Int = tabsList.size
 
-    fun getPageTitle(position: Int): String = tabsList[position]
+    val getPageTitle: (Int) -> String = { position: Int -> tabsList[position] }
 }
 

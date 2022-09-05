@@ -54,6 +54,9 @@ android {
 
 dependencies {
     //TODO - Add Modules
+    implementation(project(Modules.coreCommon))
+    implementation(project(Modules.coreDesign))
+    implementation(project(Modules.coreUtils))
 
     implementation(Core.coreKtx)
     implementation(Core.appCompat)

@@ -3,10 +3,11 @@ package com.orangeink.techtrix.home.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.orangeink.common.findIcon
 import com.orangeink.techtrix.R
 import com.orangeink.techtrix.databinding.RowCategoryItemBinding
-import com.orangeink.techtrix.util.findIcon
 
 class CategoryAdapter(
     private val mList: List<String>,
@@ -39,9 +40,9 @@ class CategoryAdapter(
         fun bind(item: String) {
             item.apply {
                 binding.tvCategory.text = item
-                item.findIcon(itemView.context).let {
-                    binding.ivCategoryIcon.setImageDrawable(it)
-                }
+                binding.ivCategoryIcon.setImageDrawable(
+                    ContextCompat.getDrawable(itemView.context, findIcon(item))
+                )
                 binding.root.setOnClickListener {
                     categoryInterface.onClick(item)
                 }

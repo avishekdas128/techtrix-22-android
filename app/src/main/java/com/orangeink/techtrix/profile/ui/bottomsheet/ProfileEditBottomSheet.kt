@@ -13,18 +13,17 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.orangeink.techtrix.R
+import com.orangeink.design.RoundedBottomSheet
 import com.orangeink.techtrix.databinding.BottomsheetProfileEditBinding
 import com.orangeink.techtrix.login.data.model.Participant
 import com.orangeink.techtrix.login.data.model.UpdateParticipant
 import com.orangeink.techtrix.login.viewmodel.LoginViewModel
 import com.orangeink.techtrix.preferences.Prefs
-import com.orangeink.techtrix.util.pxToDp
+import com.orangeink.utils.pxToDp
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProfileEditBottomSheet : BottomSheetDialogFragment() {
+class ProfileEditBottomSheet : RoundedBottomSheet() {
 
     private lateinit var binding: BottomsheetProfileEditBinding
     private val viewModel: LoginViewModel by viewModels()
@@ -38,11 +37,6 @@ class ProfileEditBottomSheet : BottomSheetDialogFragment() {
 
     fun setData(profileInterface: ProfileInterface) {
         this.profileInterface = profileInterface
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setStyle(STYLE_NORMAL, R.style.customBottomSheetDialog)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

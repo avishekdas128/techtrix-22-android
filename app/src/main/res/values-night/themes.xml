@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.TechTrix22" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
@@ -22,34 +22,6 @@
 
     <style name="WindowAnimationStyle">
         <item name="android:windowEnterAnimation">@android:anim/linear_interpolator</item>
-    </style>
-
-    <!-- BottomSheet Theme -->
-    <style name="customBottomSheetDialog" parent="Theme.MaterialComponents.DayNight.BottomSheetDialog">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_400</item>
-        <item name="colorPrimaryVariant">@color/purple_400</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/black_800</item>
-        <item name="colorSecondaryVariant">@color/black_600</item>
-        <item name="colorOnSecondary">@color/white</item>
-
-        <!-- Status bar color. -->
-        <item name="android:windowTranslucentNavigation">true</item>
-
-        <item name="bottomSheetStyle">@style/customBottomSheetStyle</item>
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:windowSoftInputMode">adjustResize</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">@color/white</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
-    </style>
-
-    <style name="customBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@android:color/transparent</item>
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:windowSoftInputMode">adjustResize|stateVisible</item>
     </style>
 
 </resources>

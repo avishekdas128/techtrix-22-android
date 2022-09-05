@@ -13,19 +13,19 @@ import androidx.core.view.children
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.orangeink.design.RoundedBottomSheet
 import com.orangeink.techtrix.R
 import com.orangeink.techtrix.databinding.BottomsheetRegisterBinding
 import com.orangeink.techtrix.event.data.model.Event
 import com.orangeink.techtrix.preferences.Prefs
 import com.orangeink.techtrix.registrations.data.model.Registration
 import com.orangeink.techtrix.registrations.viewmodel.RegistrationViewModel
-import com.orangeink.techtrix.util.pxToDp
-import com.orangeink.techtrix.util.showKeyboard
+import com.orangeink.utils.pxToDp
+import com.orangeink.utils.showKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RegisterBottomSheet : BottomSheetDialogFragment() {
+class RegisterBottomSheet : RoundedBottomSheet() {
 
     private lateinit var binding: BottomsheetRegisterBinding
     private val viewModel: RegistrationViewModel by viewModels()
@@ -40,11 +40,6 @@ class RegisterBottomSheet : BottomSheetDialogFragment() {
     fun setData(data: Event, registerInterface: RegisterInterface) {
         this.data = data
         this.registerInterface = registerInterface
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setStyle(STYLE_NORMAL, R.style.customBottomSheetDialog)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

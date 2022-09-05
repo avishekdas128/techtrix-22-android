@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Window
 import com.orangeink.techtrix.databinding.LayoutForceUpdateDialogBinding
+import com.orangeink.utils.openPlayStore
 
 class ForceUpdateDialog(
     context: Context

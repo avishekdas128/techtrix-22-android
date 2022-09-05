@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.orangeink.techtrix.R
 import com.orangeink.techtrix.databinding.RowTeamItemBinding
 import com.orangeink.techtrix.misc.data.model.Team
-import com.orangeink.techtrix.util.loadImage
+import com.orangeink.utils.loadImage
 
 class TeamAdapter(
     private val mList: List<Team>
@@ -54,7 +54,7 @@ class TeamAdapter(
                 }
                 binding.ivFacebook.setOnClickListener { openLink(item.links.first()) }
                 binding.ivLinkedin.setOnClickListener { openLink(item.links[1]) }
-                item.image?.let { binding.ivSponsor.loadImage(it) }
+                item.image?.let { binding.ivSponsor.loadImage(it, R.drawable.no_image) }
             }
         }
 

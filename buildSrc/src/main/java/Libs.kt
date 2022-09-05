@@ -8,6 +8,10 @@ object Core {
     private const val constraintLayoutVersion = "2.1.4"
     const val constraintLayout =
         "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+
+    private const val swipeRefreshLayoutVersion = "1.1.0"
+    const val swipeRefresh =
+        "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshLayoutVersion"
 }
 
 object Google {

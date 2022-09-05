@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.orangeink.techtrix.R
 import com.orangeink.techtrix.databinding.RowSponsorItemBinding
 import com.orangeink.techtrix.misc.data.model.Sponsor
-import com.orangeink.techtrix.util.loadImage
+import com.orangeink.utils.loadImage
 
 class SponsorAdapter(
     private val mList: List<Sponsor>
@@ -53,7 +53,7 @@ class SponsorAdapter(
                 binding.ivFacebook.setOnClickListener { openLink(item.links.first()) }
                 binding.ivWeb.setOnClickListener { openLink(item.links[1]) }
                 binding.ivInstagram.setOnClickListener { openLink(item.links[2]) }
-                item.image?.let { binding.ivSponsor.loadImage(it) }
+                item.image?.let { binding.ivSponsor.loadImage(it, R.drawable.no_image) }
             }
         }
 

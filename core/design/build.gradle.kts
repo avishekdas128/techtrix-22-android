@@ -3,5 +3,7 @@ apply {
 }
 
 dependencies {
-
+    "implementation"(Core.constraintLayout)
+    "implementation"(Core.swipeRefresh)
+    "implementation"(Google.material)
 }

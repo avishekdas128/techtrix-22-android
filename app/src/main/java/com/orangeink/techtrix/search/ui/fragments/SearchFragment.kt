@@ -19,7 +19,7 @@ import com.orangeink.techtrix.preferences.Prefs
 import com.orangeink.techtrix.search.adapter.TrendingSearchAdapter
 import com.orangeink.techtrix.search.viewmodel.SearchViewModel
 import com.orangeink.techtrix.util.constants.Identifier
-import com.orangeink.techtrix.util.hideKeyboard
+import com.orangeink.utils.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

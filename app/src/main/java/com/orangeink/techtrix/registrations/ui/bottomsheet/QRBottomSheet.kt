@@ -13,6 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.zxing.WriterException
+import com.orangeink.design.RoundedBottomSheet
 import com.orangeink.techtrix.R
 import com.orangeink.techtrix.databinding.BottomsheetQrCodeBinding
 import com.orangeink.techtrix.preferences.Prefs
@@ -20,14 +21,9 @@ import com.orangeink.techtrix.util.qr.QRContents
 import com.orangeink.techtrix.util.qr.QREncoder
 import timber.log.Timber
 
-class QRBottomSheet : BottomSheetDialogFragment() {
+class QRBottomSheet : RoundedBottomSheet() {
 
     private lateinit var binding: BottomsheetQrCodeBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setStyle(STYLE_NORMAL, R.style.customBottomSheetDialog)
-    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog

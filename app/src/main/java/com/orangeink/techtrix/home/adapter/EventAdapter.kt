@@ -6,12 +6,13 @@ import android.os.Build
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.orangeink.common.findIcon
 import com.orangeink.techtrix.databinding.GridEventItemBinding
 import com.orangeink.techtrix.databinding.RowEventItemBinding
 import com.orangeink.techtrix.event.data.model.Event
 import com.orangeink.techtrix.util.constants.Constants
-import com.orangeink.techtrix.util.findIcon
 
 class EventAdapter(
     private val mList: List<Event>,
@@ -69,7 +70,11 @@ class EventAdapter(
                     } else {
                         Html.fromHtml(item.desc)
                     }
-                binding.ivCategoryIcon.setImageDrawable(item.category?.findIcon(itemView.context))
+                item.category?.let {
+                    binding.ivCategoryIcon.setImageDrawable(
+                        ContextCompat.getDrawable(itemView.context, findIcon(it))
+                    )
+                }
                 binding.tvTagOne.text = item.tags[0].uppercase()
                 binding.tvTagTwo.text = item.tags[1].uppercase()
                 itemView.setOnClickListener {
@@ -91,7 +96,11 @@ class EventAdapter(
                     } else {
                         Html.fromHtml(item.desc)
                     }
-                binding.ivCategoryIcon.setImageDrawable(item.category?.findIcon(itemView.context))
+                item.category?.let {
+                    binding.ivCategoryIcon.setImageDrawable(
+                        ContextCompat.getDrawable(itemView.context, findIcon(it))
+                    )
+                }
                 binding.tvTagOne.text = item.tags.first().uppercase()
                 itemView.setOnClickListener {
                     eventInterface.onClick(item)

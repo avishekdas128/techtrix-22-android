@@ -2,11 +2,12 @@ package com.orangeink.techtrix.registrations.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.orangeink.common.findIcon
 import com.orangeink.techtrix.R
 import com.orangeink.techtrix.databinding.RowRegistrationItemBinding
 import com.orangeink.techtrix.registrations.data.model.Registration
-import com.orangeink.techtrix.util.findIcon
 
 class RegistrationAdapter(
     private val mList: List<Registration>,
@@ -40,7 +41,11 @@ class RegistrationAdapter(
             binding.apply {
                 binding.tvEventDescription.text = item.teamName
                 binding.tvEventName.text = item.eventName
-                binding.ivCategoryIcon.setImageDrawable(item.eventCategory?.findIcon(itemView.context))
+                item.eventCategory?.let {
+                    binding.ivCategoryIcon.setImageDrawable(
+                        ContextCompat.getDrawable(itemView.context, findIcon(it))
+                    )
+                }
                 binding.tvTagOne.text =
                     if (item.paid!!)
                         itemView.context.getString(R.string.paid)

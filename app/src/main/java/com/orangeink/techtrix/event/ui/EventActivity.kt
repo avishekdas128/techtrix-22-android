@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.orangeink.common.findIcon
 import com.orangeink.techtrix.R
 import com.orangeink.techtrix.databinding.ActivityEventBinding
 import com.orangeink.techtrix.event.data.model.Event
@@ -18,7 +19,6 @@ import com.orangeink.techtrix.event.viewmodel.EventViewModel
 import com.orangeink.techtrix.preferences.Prefs
 import com.orangeink.techtrix.registrations.ui.bottomsheet.RegisterBottomSheet
 import com.orangeink.techtrix.util.constants.Identifier
-import com.orangeink.techtrix.util.findIcon
 import dagger.hilt.android.AndroidEntryPoint
 
 @Suppress("DEPRECATION")
@@ -55,7 +55,11 @@ class EventActivity : AppCompatActivity() {
     private fun initViews() {
         eventId?.let { viewModel.getEventDetails(it) }
         binding.tvHeading.text = eventTile
-        binding.ivCategoryIcon.setImageDrawable(eventCategory?.findIcon(this))
+        eventCategory?.let {
+            binding.ivCategoryIcon.setImageDrawable(
+                ContextCompat.getDrawable(this@EventActivity, findIcon(it))
+            )
+        }
     }
 
     private fun checkLoginStatus(data: Event) {
@@ -112,7 +116,11 @@ class EventActivity : AppCompatActivity() {
 
     private fun setupUI(data: Event) {
         binding.tvHeading.text = data.name
-        binding.ivCategoryIcon.setImageDrawable(data.category?.findIcon(this))
+        data.category?.let {
+            binding.ivCategoryIcon.setImageDrawable(
+                ContextCompat.getDrawable(this@EventActivity, findIcon(it))
+            )
+        }
         binding.tvEventDescription.movementMethod = LinkMovementMethod.getInstance()
         binding.tvEventRules.movementMethod = LinkMovementMethod.getInstance()
         binding.tvEventContact.movementMethod = LinkMovementMethod.getInstance()

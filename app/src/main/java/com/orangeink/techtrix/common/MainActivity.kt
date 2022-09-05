@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
+import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -22,7 +23,6 @@ import com.orangeink.techtrix.databinding.ActivityMainBinding
 import com.orangeink.techtrix.home.ui.fragments.HomeFragment
 import com.orangeink.techtrix.login.viewmodel.LoginViewModel
 import com.orangeink.techtrix.preferences.Prefs
-import com.orangeink.techtrix.util.GlideApp
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun loadProfileImage(uri: Uri) {
-        GlideApp.with(this)
+        Glide.with(this)
             .asBitmap()
             .load(uri)
             .apply(

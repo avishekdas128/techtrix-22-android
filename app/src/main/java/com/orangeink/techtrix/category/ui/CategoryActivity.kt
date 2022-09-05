@@ -6,15 +6,16 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.orangeink.common.findIcon
 import com.orangeink.techtrix.R
 import com.orangeink.techtrix.category.viewmodel.CategoryViewModel
 import com.orangeink.techtrix.databinding.ActivityCategoryBinding
-import com.orangeink.techtrix.event.ui.EventActivity
 import com.orangeink.techtrix.event.data.model.Event
+import com.orangeink.techtrix.event.ui.EventActivity
 import com.orangeink.techtrix.home.adapter.EventAdapter
 import com.orangeink.techtrix.util.constants.Identifier
-import com.orangeink.techtrix.util.findIcon
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -43,7 +44,9 @@ class CategoryActivity : AppCompatActivity() {
 
     private fun initViews() {
         binding.tvHeading.text = categoryName
-        binding.ivCategoryIcon.setImageDrawable(categoryName.findIcon(this))
+        binding.ivCategoryIcon.setImageDrawable(
+            ContextCompat.getDrawable(this, findIcon(categoryName))
+        )
         viewModel.eventsByCategory(categoryName)
     }
 

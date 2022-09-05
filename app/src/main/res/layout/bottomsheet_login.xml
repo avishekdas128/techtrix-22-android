@@ -119,7 +119,7 @@
                 android:indeterminateTint="@color/purple_400"
                 android:visibility="gone" />
 
-            <com.orangeink.techtrix.util.view.GoogleSignInButton
+            <com.orangeink.design.GoogleSignInButton
                 android:id="@+id/btn_google"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

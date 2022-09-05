@@ -17,24 +17,24 @@ import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.orangeink.design.RoundedBottomSheet
 import com.orangeink.techtrix.R
 import com.orangeink.techtrix.databinding.BottomsheetLoginBinding
 import com.orangeink.techtrix.login.viewmodel.LoginViewModel
 import com.orangeink.techtrix.preferences.Prefs
-import com.orangeink.techtrix.util.hideKeyboard
-import com.orangeink.techtrix.util.isValidEmail
-import com.orangeink.techtrix.util.pxToDp
+import com.orangeink.utils.hideKeyboard
+import com.orangeink.utils.isValidEmail
+import com.orangeink.utils.pxToDp
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 @AndroidEntryPoint
-class LoginBottomSheet : BottomSheetDialogFragment() {
+class LoginBottomSheet : RoundedBottomSheet() {
 
     private lateinit var binding: BottomsheetLoginBinding
     private lateinit var auth: FirebaseAuth
@@ -52,11 +52,6 @@ class LoginBottomSheet : BottomSheetDialogFragment() {
 
     fun setData(loginInterface: LoginInterface) {
         this.loginInterface = loginInterface
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setStyle(STYLE_NORMAL, R.style.customBottomSheetDialog)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

@@ -16,10 +16,10 @@ import com.orangeink.techtrix.R
 import com.orangeink.techtrix.databinding.FragmentHomeBinding
 import com.orangeink.techtrix.preferences.Prefs
 import com.orangeink.techtrix.search.ui.fragments.SearchFragment
-import com.orangeink.techtrix.util.addFragmentFromBottom
-import com.orangeink.techtrix.util.hideKeyboard
-import com.orangeink.techtrix.util.loadFragment
-import com.orangeink.techtrix.util.showKeyboard
+import com.orangeink.utils.addFragmentFromBottom
+import com.orangeink.utils.hideKeyboard
+import com.orangeink.utils.loadFragment
+import com.orangeink.utils.showKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

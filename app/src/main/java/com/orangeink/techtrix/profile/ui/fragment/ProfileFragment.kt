@@ -24,8 +24,8 @@ import com.orangeink.techtrix.profile.ui.bottomsheet.ProfileEditBottomSheet
 import com.orangeink.techtrix.profile.ui.dialog.LogoutDialog
 import com.orangeink.techtrix.util.constants.Identifier
 import com.orangeink.techtrix.util.constants.ScreenType
-import com.orangeink.techtrix.util.loadImage
-import com.orangeink.techtrix.util.setData
+import com.orangeink.utils.loadImage
+import com.orangeink.utils.setData
 import timber.log.Timber
 
 class ProfileFragment : Fragment() {
@@ -62,7 +62,7 @@ class ProfileFragment : Fragment() {
                 binding.ivEdit.visibility = View.VISIBLE
 
                 it.photoUrl?.let { photo ->
-                    binding.ivProfile.loadImage(photo)
+                    binding.ivProfile.loadImage(photo, R.drawable.dummy_avatar)
                 }
                 binding.tvName.text = participant.name
 

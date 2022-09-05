@@ -4,13 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
-import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -24,7 +20,6 @@ import com.orangeink.techtrix.registrations.adapter.RegistrationPagerAdapter
 import com.orangeink.techtrix.registrations.data.model.Registration
 import com.orangeink.techtrix.registrations.ui.bottomsheet.QRBottomSheet
 import com.orangeink.techtrix.registrations.viewmodel.RegistrationViewModel
-import com.orangeink.techtrix.util.setupTabView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -88,27 +83,7 @@ class RegistrationsFragment : Fragment() {
             adapter = pagerAdapter
             offscreenPageLimit = 2
         }
-        binding.tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                requireContext().setupTabView(true, tab)
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-                requireContext().setupTabView(false, tab)
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab) {}
-        })
-        TabLayoutMediator(
-            binding.tabLayout,
-            binding.registrationsVp
-        ) { tab: TabLayout.Tab, position: Int ->
-            tab.setCustomView(R.layout.layout_custom_tab)
-            tab.customView?.let {
-                (it.findViewById<View>(R.id.tv_tab_label) as TextView).text =
-                    pagerAdapter.getPageTitle(position)
-            }
-        }.attach()
+        binding.tabLayout.setupMediator(binding.registrationsVp, pagerAdapter.getPageTitle)
     }
 
     private fun subscribeToLiveData() {

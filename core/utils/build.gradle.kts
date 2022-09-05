@@ -3,5 +3,6 @@ apply {
 }
 
 dependencies {
-
+    "implementation"(Glide.glide)
+    "kapt"(Glide.glideCompiler)
 }
