@@ -14,6 +14,11 @@ object Core {
         "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshLayoutVersion"
 }
 
+object Fragment {
+    private const val fragmentVersion = "1.4.1"
+    const val fragmentKtx = "androidx.fragment:fragment-ktx:$fragmentVersion"
+}
+
 object Google {
     private const val materialVersion = "1.5.0"
     const val material = "com.google.android.material:material:$materialVersion"

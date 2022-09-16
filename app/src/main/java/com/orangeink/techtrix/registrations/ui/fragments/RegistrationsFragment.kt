@@ -11,13 +11,13 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.orangeink.techtrix.R
-import com.orangeink.techtrix.common.MainActivity
+import com.orangeink.techtrix.MainActivity
 import com.orangeink.techtrix.databinding.FragmentRegistrationsBinding
 import com.orangeink.techtrix.login.ui.bottomsheet.LoginBottomSheet
 import com.orangeink.techtrix.login.ui.bottomsheet.ProfileBottomSheet
-import com.orangeink.techtrix.preferences.Prefs
+import com.orangeink.common.preferences.Prefs
 import com.orangeink.techtrix.registrations.adapter.RegistrationPagerAdapter
-import com.orangeink.techtrix.registrations.data.model.Registration
+import com.orangeink.network.model.Registration
 import com.orangeink.techtrix.registrations.ui.bottomsheet.QRBottomSheet
 import com.orangeink.techtrix.registrations.viewmodel.RegistrationViewModel
 import dagger.hilt.android.AndroidEntryPoint

@@ -10,15 +10,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.orangeink.common.constants.Identifier
 import com.orangeink.techtrix.R
 import com.orangeink.techtrix.databinding.FragmentNotificationBinding
 import com.orangeink.techtrix.misc.ui.ListActivity
 import com.orangeink.techtrix.notifications.adapter.NotificationAdapter
-import com.orangeink.techtrix.notifications.data.model.Notification
+import com.orangeink.network.model.Notification
 import com.orangeink.techtrix.notifications.viewmodel.NotificationViewModel
-import com.orangeink.techtrix.preferences.Prefs
-import com.orangeink.techtrix.util.constants.Identifier
-import com.orangeink.techtrix.util.constants.ScreenType
+import com.orangeink.common.preferences.Prefs
+import com.orangeink.common.constants.ScreenType
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

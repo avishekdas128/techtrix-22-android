@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.orangeink.techtrix.common.SuccessResponse
-import com.orangeink.techtrix.registrations.data.model.Registration
+import com.orangeink.network.model.SuccessResponse
+import com.orangeink.network.model.Registration
 import com.orangeink.techtrix.registrations.data.remote.RegistrationRepository
-import com.orangeink.techtrix.util.Resource
+import com.orangeink.network.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

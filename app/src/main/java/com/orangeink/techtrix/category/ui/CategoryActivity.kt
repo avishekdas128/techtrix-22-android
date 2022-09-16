@@ -8,14 +8,14 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.orangeink.common.constants.Identifier
 import com.orangeink.common.findIcon
+import com.orangeink.common.adapter.EventAdapter
+import com.orangeink.network.model.Event
 import com.orangeink.techtrix.R
 import com.orangeink.techtrix.category.viewmodel.CategoryViewModel
 import com.orangeink.techtrix.databinding.ActivityCategoryBinding
-import com.orangeink.techtrix.event.data.model.Event
 import com.orangeink.techtrix.event.ui.EventActivity
-import com.orangeink.techtrix.home.adapter.EventAdapter
-import com.orangeink.techtrix.util.constants.Identifier
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

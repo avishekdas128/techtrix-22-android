@@ -15,10 +15,10 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.orangeink.design.RoundedBottomSheet
 import com.orangeink.techtrix.databinding.BottomsheetProfileEditBinding
-import com.orangeink.techtrix.login.data.model.Participant
-import com.orangeink.techtrix.login.data.model.UpdateParticipant
+import com.orangeink.network.model.Participant
+import com.orangeink.network.model.UpdateParticipant
 import com.orangeink.techtrix.login.viewmodel.LoginViewModel
-import com.orangeink.techtrix.preferences.Prefs
+import com.orangeink.common.preferences.Prefs
 import com.orangeink.utils.pxToDp
 import dagger.hilt.android.AndroidEntryPoint
 

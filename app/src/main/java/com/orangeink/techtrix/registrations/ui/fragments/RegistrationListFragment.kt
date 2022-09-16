@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.orangeink.common.constants.Identifier
 import com.orangeink.techtrix.R
 import com.orangeink.techtrix.databinding.FragmentRegistrationListBinding
 import com.orangeink.techtrix.misc.ui.ListActivity
 import com.orangeink.techtrix.registrations.adapter.RegistrationAdapter
-import com.orangeink.techtrix.registrations.data.model.Registration
-import com.orangeink.techtrix.util.constants.Identifier
-import com.orangeink.techtrix.util.constants.ScreenType
+import com.orangeink.network.model.Registration
+import com.orangeink.common.constants.ScreenType
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.orangeink.techtrix.notifications.data.model.Notification
+import com.orangeink.network.model.Notification
 import com.orangeink.techtrix.notifications.data.remote.NotificationRepository
-import com.orangeink.techtrix.util.Resource
+import com.orangeink.network.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.orangeink.techtrix.R
 import com.orangeink.techtrix.databinding.RowNotificationItemBinding
-import com.orangeink.techtrix.notifications.data.model.Notification
+import com.orangeink.network.model.Notification
 import com.orangeink.utils.formatDate
 
 class NotificationAdapter(

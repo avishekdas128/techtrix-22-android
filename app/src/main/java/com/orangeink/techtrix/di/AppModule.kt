@@ -1,26 +1,18 @@
 package com.orangeink.techtrix.di
 
+import com.orangeink.techtrix.navigator.AppNavigatorImpl
+import com.orangeink.common.navigator.IAppNavigator
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
+import dagger.Reusable
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.SupervisorJob
-import javax.inject.Qualifier
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
+abstract class AppModule {
 
-    @ApplicationScope
-    @Provides
-    @Singleton
-    fun provideApplicationScope(): CoroutineScope {
-        return CoroutineScope(SupervisorJob())
-    }
+    @Binds
+    @Reusable
+    abstract fun provideAppNavigator(appNavigatorImpl: AppNavigatorImpl): IAppNavigator
 }
-
-@Retention(AnnotationRetention.RUNTIME)
-@Qualifier
-annotation class ApplicationScope

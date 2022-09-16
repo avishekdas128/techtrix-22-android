@@ -31,8 +31,6 @@
     <string name="sponsors">Sponsors</string>
     <string name="team">Team</string>
     <string name="dummy_version">1.0.0</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="no_login_event">Looks like you’ve not logged in yet. Log in to register for the event.</string>
     <string name="description">Description</string>
     <string name="rules">Rules</string>
@@ -78,4 +76,5 @@
     <string name="update_available">Update Available</string>
     <string name="update_message">To continue using the application, please make sure to update it.</string>
     <string name="update">Update</string>
+    <string name="search">Search</string>
 </resources>

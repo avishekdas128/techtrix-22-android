@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".common.MainActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
         <activity

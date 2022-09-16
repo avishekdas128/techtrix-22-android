@@ -26,7 +26,7 @@ import com.orangeink.design.RoundedBottomSheet
 import com.orangeink.techtrix.R
 import com.orangeink.techtrix.databinding.BottomsheetLoginBinding
 import com.orangeink.techtrix.login.viewmodel.LoginViewModel
-import com.orangeink.techtrix.preferences.Prefs
+import com.orangeink.common.preferences.Prefs
 import com.orangeink.utils.hideKeyboard
 import com.orangeink.utils.isValidEmail
 import com.orangeink.utils.pxToDp

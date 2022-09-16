@@ -17,9 +17,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.FirebaseUser
 import com.orangeink.design.RoundedBottomSheet
 import com.orangeink.techtrix.databinding.BottomsheetProfileBinding
-import com.orangeink.techtrix.login.data.model.Participant
+import com.orangeink.network.model.Participant
 import com.orangeink.techtrix.login.viewmodel.LoginViewModel
-import com.orangeink.techtrix.preferences.Prefs
+import com.orangeink.common.preferences.Prefs
 import com.orangeink.utils.isValidPhoneNumber
 import com.orangeink.utils.pxToDp
 import dagger.hilt.android.AndroidEntryPoint

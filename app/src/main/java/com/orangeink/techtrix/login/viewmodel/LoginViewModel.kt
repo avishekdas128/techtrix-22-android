@@ -7,11 +7,11 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.orangeink.techtrix.common.SuccessResponse
-import com.orangeink.techtrix.login.data.model.Participant
-import com.orangeink.techtrix.login.data.model.UpdateParticipant
+import com.orangeink.network.model.SuccessResponse
+import com.orangeink.network.model.Participant
+import com.orangeink.network.model.UpdateParticipant
 import com.orangeink.techtrix.login.data.remote.LoginRepository
-import com.orangeink.techtrix.util.Resource
+import com.orangeink.network.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

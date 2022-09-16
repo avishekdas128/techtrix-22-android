@@ -11,14 +11,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.orangeink.common.constants.Identifier
 import com.orangeink.common.findIcon
 import com.orangeink.techtrix.R
 import com.orangeink.techtrix.databinding.ActivityEventBinding
-import com.orangeink.techtrix.event.data.model.Event
+import com.orangeink.network.model.Event
 import com.orangeink.techtrix.event.viewmodel.EventViewModel
-import com.orangeink.techtrix.preferences.Prefs
+import com.orangeink.common.preferences.Prefs
 import com.orangeink.techtrix.registrations.ui.bottomsheet.RegisterBottomSheet
-import com.orangeink.techtrix.util.constants.Identifier
 import dagger.hilt.android.AndroidEntryPoint
 
 @Suppress("DEPRECATION")

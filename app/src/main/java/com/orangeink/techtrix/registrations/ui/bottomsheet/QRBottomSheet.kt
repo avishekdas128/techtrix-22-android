@@ -11,12 +11,11 @@ import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.zxing.WriterException
 import com.orangeink.design.RoundedBottomSheet
 import com.orangeink.techtrix.R
 import com.orangeink.techtrix.databinding.BottomsheetQrCodeBinding
-import com.orangeink.techtrix.preferences.Prefs
+import com.orangeink.common.preferences.Prefs
 import com.orangeink.techtrix.util.qr.QRContents
 import com.orangeink.techtrix.util.qr.QREncoder
 import timber.log.Timber

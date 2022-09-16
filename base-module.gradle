@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-parcelize'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdk ProjectConfig.compileSdk
@@ -11,6 +12,12 @@ android {
         targetSdk ProjectConfig.targetSdk
         versionCode ProjectConfig.versionCode
         versionName ProjectConfig.versionName
+
+        Properties properties = new Properties()
+        if (rootProject.file("local.properties").exists()) {
+            properties.load(rootProject.file("local.properties").newDataInputStream())
+        }
+        buildConfigField("String", "API_KEY", properties.getProperty("API_KEY", ""))
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -30,10 +37,23 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
     implementation External.timber
+
+    implementation Fragment.fragmentKtx
+
+    implementation Lifecycle.liveData
+    implementation Lifecycle.viewModel
+    implementation Lifecycle.runtime
+    implementation Lifecycle.extension
+
+    implementation Hilt.android
+    kapt Hilt.compiler
 
     implementation Testing.junit4
     implementation Testing.junitAndroidExt

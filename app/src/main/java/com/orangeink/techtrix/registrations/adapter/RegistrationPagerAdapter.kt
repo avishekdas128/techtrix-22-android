@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.orangeink.techtrix.registrations.data.model.Registration
+import com.orangeink.network.model.Registration
 import com.orangeink.techtrix.registrations.ui.fragments.RegistrationListFragment
 
 class RegistrationPagerAdapter(

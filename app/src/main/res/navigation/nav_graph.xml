@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.orangeink.techtrix.home.ui.fragments.HomeFragment"
+        android:name="com.orangeink.home.HomeFragment"
         android:label="@string/home"
         tools:layout="@layout/fragment_home" />
 
@@ -28,5 +28,11 @@
         android:name="com.orangeink.techtrix.profile.ui.fragment.ProfileFragment"
         android:label="@string/profile"
         tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.orangeink.search.SearchFragment"
+        android:label="@string/search"
+        tools:layout="@layout/fragment_search" />
 
 </navigation>

@@ -3,10 +3,10 @@ package com.orangeink.techtrix.login.data.remote
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.orangeink.techtrix.data.network.TechTrixService
-import com.orangeink.techtrix.login.data.model.Participant
-import com.orangeink.techtrix.login.data.model.UpdateParticipant
-import com.orangeink.techtrix.util.BaseDataSource
+import com.orangeink.network.service.TechTrixService
+import com.orangeink.network.model.Participant
+import com.orangeink.network.model.UpdateParticipant
+import com.orangeink.network.BaseDataSource
 import kotlinx.coroutines.tasks.await
 import timber.log.Timber
 import javax.inject.Inject

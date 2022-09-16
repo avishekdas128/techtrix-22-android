@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.orangeink.common.findIcon
 import com.orangeink.techtrix.R
 import com.orangeink.techtrix.databinding.RowRegistrationItemBinding
-import com.orangeink.techtrix.registrations.data.model.Registration
+import com.orangeink.network.model.Registration
 
 class RegistrationAdapter(
     private val mList: List<Registration>,

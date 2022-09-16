@@ -4,4 +4,7 @@
         <attr name="isDarkTheme" format="boolean" />
         <attr name="android:text" />
     </declare-styleable>
+
+    <attr name="colorSecondary" format="reference|color" />
+    <attr name="colorOnPrimary" format="reference|color" />
 </resources>

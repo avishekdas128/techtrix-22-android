@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.orangeink.techtrix.common.MainActivity
+import com.orangeink.techtrix.MainActivity
 import com.orangeink.techtrix.databinding.ActivitySplashBinding
-import com.orangeink.techtrix.preferences.Prefs
+import com.orangeink.common.preferences.Prefs
 import dagger.hilt.android.AndroidEntryPoint
 
 @SuppressLint("CustomSplashScreen")

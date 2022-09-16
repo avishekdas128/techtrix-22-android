@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.orangeink.techtrix.R
 import com.orangeink.techtrix.databinding.RowSponsorItemBinding
-import com.orangeink.techtrix.misc.data.model.Sponsor
+import com.orangeink.network.model.Sponsor
 import com.orangeink.utils.loadImage
 
 class SponsorAdapter(

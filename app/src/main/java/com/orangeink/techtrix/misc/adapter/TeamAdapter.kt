@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.orangeink.techtrix.R
 import com.orangeink.techtrix.databinding.RowTeamItemBinding
-import com.orangeink.techtrix.misc.data.model.Team
+import com.orangeink.network.model.Team
 import com.orangeink.utils.loadImage
 
 class TeamAdapter(

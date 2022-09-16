@@ -5,13 +5,116 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".common.MainActivity">
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorSecondary"
+        android:elevation="@dimen/padding_4">
+
+        <FrameLayout
+            android:id="@+id/root_frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_16">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/ll_icons"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:orientation="horizontal"
+                    android:paddingVertical="@dimen/padding_16">
+
+                    <ImageView
+                        android:id="@+id/iv_search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_16"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_search"
+                        tools:ignore="ContentDescription" />
+
+                    <ImageView
+                        android:id="@+id/iv_map"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_16"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_map"
+                        app:tint="?attr/colorOnPrimary"
+                        tools:ignore="ContentDescription" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_heading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@id/ll_icons"
+                    android:drawablePadding="@dimen/padding_8"
+                    android:includeFontPadding="false"
+                    android:text="@string/hello_guest"
+                    android:textColor="?attr/colorOnPrimary"
+                    android:textSize="@dimen/text_size_18" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/search_open_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/colorSecondary"
+                android:visibility="invisible">
+
+                <EditText
+                    android:id="@+id/search_input_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginVertical="@dimen/margin_8"
+                    android:layout_marginEnd="@dimen/margin_16"
+                    android:layout_toEndOf="@id/iv_close_search"
+                    android:background="@null"
+                    android:hint="@string/search_hint"
+                    android:imeOptions="actionSearch"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:paddingHorizontal="@dimen/padding_16"
+                    android:textColor="?attr/colorOnPrimary"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/text_size_14" />
+
+                <ImageView
+                    android:id="@+id/iv_close_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_round_arrow_back_24"
+                    app:tint="?attr/colorOnPrimary"
+                    tools:ignore="ContentDescription" />
+
+            </RelativeLayout>
+
+        </FrameLayout>
+
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/parent_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottom_navigation">
+        android:layout_above="@id/bottom_navigation"
+        android:layout_below="@id/toolbar">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/main_fragment_container"

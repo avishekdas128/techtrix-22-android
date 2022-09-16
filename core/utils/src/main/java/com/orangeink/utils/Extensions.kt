@@ -33,3 +33,9 @@ fun Context.openPlayStore() {
         )
     }
 }
+
+inline fun <reified T> tryCast(instance: Any?, block: T.() -> Unit) {
+    if (instance is T) {
+        block(instance)
+    }
+}

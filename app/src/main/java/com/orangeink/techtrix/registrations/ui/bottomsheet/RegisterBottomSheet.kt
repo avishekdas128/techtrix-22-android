@@ -16,9 +16,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.orangeink.design.RoundedBottomSheet
 import com.orangeink.techtrix.R
 import com.orangeink.techtrix.databinding.BottomsheetRegisterBinding
-import com.orangeink.techtrix.event.data.model.Event
-import com.orangeink.techtrix.preferences.Prefs
-import com.orangeink.techtrix.registrations.data.model.Registration
+import com.orangeink.network.model.Event
+import com.orangeink.common.preferences.Prefs
+import com.orangeink.network.model.Registration
 import com.orangeink.techtrix.registrations.viewmodel.RegistrationViewModel
 import com.orangeink.utils.pxToDp
 import com.orangeink.utils.showKeyboard

@@ -1,7 +1,7 @@
 package com.orangeink.techtrix.category.data.remote
 
-import com.orangeink.techtrix.data.network.TechTrixService
-import com.orangeink.techtrix.util.BaseDataSource
+import com.orangeink.network.service.TechTrixService
+import com.orangeink.network.BaseDataSource
 import javax.inject.Inject
 import javax.inject.Singleton
 

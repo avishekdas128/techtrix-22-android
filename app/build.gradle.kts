@@ -1,5 +1,3 @@
-import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
-
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
@@ -9,8 +7,6 @@ plugins {
     kotlin("android")
     kotlin("kapt")
 }
-
-val key: String = gradleLocalProperties(rootDir).getProperty("API_KEY")
 
 android {
     compileSdk = ProjectConfig.compileSdk
@@ -25,8 +21,6 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-
-        buildConfigField("String", "API_KEY", "\"$key\"")
     }
 
     buildTypes {
@@ -54,9 +48,13 @@ android {
 
 dependencies {
     //TODO - Add Modules
+    implementation(project(Modules.coreNetwork))
     implementation(project(Modules.coreCommon))
     implementation(project(Modules.coreDesign))
     implementation(project(Modules.coreUtils))
+
+    implementation(project(Modules.featureHome))
+    implementation(project(Modules.featureSearch))
 
     implementation(Core.coreKtx)
     implementation(Core.appCompat)
@@ -98,10 +96,8 @@ dependencies {
     implementation(Firebase.messaging)
 
     implementation(External.timber)
-    implementation(External.countdownView)
     implementation(External.circleImageView)
     implementation(External.roundedImageView)
-    implementation(External.carousel)
     implementation(External.qrCode)
 
     implementation(Testing.junit4)

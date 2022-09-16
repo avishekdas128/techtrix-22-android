@@ -1,7 +1,7 @@
 package com.orangeink.techtrix.notifications.data.remote
 
-import com.orangeink.techtrix.data.network.NotificationService
-import com.orangeink.techtrix.util.BaseDataSource
+import com.orangeink.network.service.NotificationService
+import com.orangeink.network.BaseDataSource
 import javax.inject.Inject
 import javax.inject.Singleton
 
