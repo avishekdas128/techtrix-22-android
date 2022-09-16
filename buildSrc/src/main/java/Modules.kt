@@ -6,4 +6,5 @@ object Modules {
 
     const val featureHome = ":feature:home"
     const val featureSearch = ":feature:search"
+    const val featureRegistration = ":feature:registration"
 }

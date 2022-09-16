@@ -1,4 +1,4 @@
-package com.orangeink.techtrix.registrations.ui.bottomsheet
+package com.orangeink.registration.ui.bottomsheet
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -13,13 +13,13 @@ import androidx.core.view.children
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.orangeink.design.RoundedBottomSheet
-import com.orangeink.techtrix.R
-import com.orangeink.techtrix.databinding.BottomsheetRegisterBinding
-import com.orangeink.network.model.Event
 import com.orangeink.common.preferences.Prefs
+import com.orangeink.design.RoundedBottomSheet
+import com.orangeink.network.model.Event
 import com.orangeink.network.model.Registration
-import com.orangeink.techtrix.registrations.viewmodel.RegistrationViewModel
+import com.orangeink.registration.R
+import com.orangeink.registration.RegistrationViewModel
+import com.orangeink.registration.databinding.BottomsheetRegisterBinding
 import com.orangeink.utils.pxToDp
 import com.orangeink.utils.showKeyboard
 import dagger.hilt.android.AndroidEntryPoint
@@ -140,7 +140,7 @@ class RegisterBottomSheet : RoundedBottomSheet() {
             } else {
                 Toast.makeText(
                     requireContext(),
-                    getString(R.string.reg_failure),
+                    getString(com.orangeink.common.R.string.reg_failure),
                     Toast.LENGTH_SHORT
                 ).show()
             }

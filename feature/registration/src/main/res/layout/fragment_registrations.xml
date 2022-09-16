@@ -4,52 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".registrations.ui.fragments.RegistrationsFragment">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorSecondary"
-        android:elevation="@dimen/padding_4">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/iv_qr"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginHorizontal="@dimen/margin_16"
-                android:background="?selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_round_qr_code_2_24"
-                android:visibility="gone"
-                app:tint="?attr/colorOnPrimary"
-                tools:ignore="ContentDescription" />
-
-            <TextView
-                android:id="@+id/tv_heading"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toStartOf="@id/iv_qr"
-                android:drawablePadding="@dimen/padding_8"
-                android:includeFontPadding="false"
-                android:text="@string/registrations"
-                android:textColor="?attr/colorOnPrimary"
-                android:textSize="@dimen/text_size_18" />
-
-        </RelativeLayout>
-
-    </androidx.appcompat.widget.Toolbar>
+    tools:context="com.orangeink.registration.RegistrationsFragment">
 
     <TextView
         android:id="@+id/tv_reg_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
         android:background="?attr/colorSecondaryVariant"
         android:drawablePadding="@dimen/padding_8"
         android:gravity="center_vertical"

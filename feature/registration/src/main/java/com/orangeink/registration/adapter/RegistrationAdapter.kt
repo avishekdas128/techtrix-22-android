@@ -1,13 +1,12 @@
-package com.orangeink.techtrix.registrations.adapter
+package com.orangeink.registration.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.orangeink.common.findIcon
-import com.orangeink.techtrix.R
-import com.orangeink.techtrix.databinding.RowRegistrationItemBinding
 import com.orangeink.network.model.Registration
+import com.orangeink.registration.databinding.RowRegistrationItemBinding
 
 class RegistrationAdapter(
     private val mList: List<Registration>,
@@ -48,9 +47,9 @@ class RegistrationAdapter(
                 }
                 binding.tvTagOne.text =
                     if (item.paid!!)
-                        itemView.context.getString(R.string.paid)
+                        itemView.context.getString(com.orangeink.common.R.string.paid)
                     else
-                        itemView.context.getString(R.string.unpaid)
+                        itemView.context.getString(com.orangeink.common.R.string.unpaid)
                 itemView.setOnClickListener {
                     registrationInterface.onClick(item)
                 }

@@ -1,4 +1,4 @@
-package com.orangeink.techtrix.registrations.ui.bottomsheet
+package com.orangeink.registration.ui.bottomsheet
 
 import android.app.Dialog
 import android.content.DialogInterface
@@ -12,12 +12,11 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.zxing.WriterException
-import com.orangeink.design.RoundedBottomSheet
-import com.orangeink.techtrix.R
-import com.orangeink.techtrix.databinding.BottomsheetQrCodeBinding
 import com.orangeink.common.preferences.Prefs
-import com.orangeink.techtrix.util.qr.QRContents
-import com.orangeink.techtrix.util.qr.QREncoder
+import com.orangeink.design.RoundedBottomSheet
+import com.orangeink.registration.databinding.BottomsheetQrCodeBinding
+import com.orangeink.registration.qr.QRContents
+import com.orangeink.registration.qr.QREncoder
 import timber.log.Timber
 
 class QRBottomSheet : RoundedBottomSheet() {
@@ -53,7 +52,8 @@ class QRBottomSheet : RoundedBottomSheet() {
     private fun generateQR() {
         Prefs(requireContext()).user?.email.let {
             val qrgEncoder = QREncoder(it, null, QRContents.Type.EMAIL, 500)
-            qrgEncoder.colorBlack = ContextCompat.getColor(requireContext(), R.color.purple_400)
+            qrgEncoder.colorBlack =
+                ContextCompat.getColor(requireContext(), com.orangeink.design.R.color.purple_400)
             qrgEncoder.colorWhite = Color.TRANSPARENT
             try {
                 binding.ivQrCode.setImageBitmap(qrgEncoder.bitmap)

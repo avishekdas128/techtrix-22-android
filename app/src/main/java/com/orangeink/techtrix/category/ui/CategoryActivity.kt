@@ -88,7 +88,7 @@ class CategoryActivity : AppCompatActivity() {
             binding.rvCategoryEvents.visibility = View.GONE
             binding.layoutEmpty.btnEmptyIllustration.visibility = View.GONE
             binding.layoutEmpty.tvEmptyIllustration.text = getString(R.string.coming_soon)
-            binding.layoutEmpty.ivEmptyIllustration.setImageResource(R.drawable.illustration_no_reg)
+            binding.layoutEmpty.ivEmptyIllustration.setImageResource(com.orangeink.common.R.drawable.illustration_no_reg)
             binding.layoutEmpty.root.visibility = View.VISIBLE
         }
     }

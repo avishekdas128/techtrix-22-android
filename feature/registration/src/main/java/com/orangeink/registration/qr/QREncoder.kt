@@ -1,4 +1,4 @@
-package com.orangeink.techtrix.util.qr
+package com.orangeink.registration.qr
 
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -9,35 +9,23 @@ import com.google.zxing.EncodeHintType
 import com.google.zxing.MultiFormatWriter
 import java.util.*
 
-class QREncoder {
+@Suppress("DEPRECATION")
+class QREncoder(data: String?, bundle: Bundle?, type: String, private var dimension: Int) {
 
     var colorWhite = -0x1
     var colorBlack = -0x1000000
-    private var dimension = Int.MIN_VALUE
     private var contents: String? = null
     private var displayContents: String? = null
-    var title: String? = null
-        private set
+    private var title: String? = null
     private var format: BarcodeFormat? = null
     private var encoded = false
 
-    constructor(data: String?, type: String?) {
-        encoded = encodeContents(data, null, QRContents.Type.TEXT)
-    }
-
-    constructor(data: String?, type: String?, dimension: Int) {
-        this.dimension = dimension
-        encoded = encodeContents(data, null, QRContents.Type.TEXT)
-    }
-
-    constructor(data: String?, bundle: Bundle?, type: String, dimension: Int) {
-        this.dimension = dimension
+    init {
         encoded = encodeContents(data, bundle, type)
     }
 
     private fun encodeContents(data: String?, bundle: Bundle?, type: String): Boolean {
         // Default to QR_CODE if no format given.
-        format = BarcodeFormat.QR_CODE
         if (format == BarcodeFormat.QR_CODE) {
             format = BarcodeFormat.QR_CODE
             encodeQRCodeContents(data, bundle, type)
@@ -49,8 +37,8 @@ class QREncoder {
         return contents != null && contents!!.isNotEmpty()
     }
 
-    private fun encodeQRCodeContents(data: String?, bundle: Bundle?, type: String) {
-        var data = data
+    private fun encodeQRCodeContents(qrData: String?, bundle: Bundle?, type: String) {
+        var data = qrData
         when (type) {
             QRContents.Type.TEXT -> if (data != null && data.isNotEmpty()) {
                 contents = data
@@ -100,7 +88,7 @@ class QREncoder {
                     var x = 0
                     while (x < QRContents.PHONE_KEYS.size) {
                         val phone =
-                            trim(bundle.getString(QRContents.PHONE_KEYS.get(x)))
+                            trim(bundle.getString(QRContents.PHONE_KEYS[x]))
                         if (phone != null) {
                             uniquePhones.add(phone)
                         }
@@ -137,7 +125,7 @@ class QREncoder {
                 }
 
                 // Make sure we've encoded at least one field.
-                if (newDisplayContents.length > 0) {
+                if (newDisplayContents.isNotEmpty()) {
                     newContents.append(';')
                     contents = newContents.toString()
                     displayContents = newDisplayContents.toString()

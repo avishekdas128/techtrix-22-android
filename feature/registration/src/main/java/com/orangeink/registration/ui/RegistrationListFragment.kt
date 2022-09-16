@@ -1,23 +1,24 @@
-package com.orangeink.techtrix.registrations.ui.fragments
+package com.orangeink.registration.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.orangeink.common.constants.Identifier
-import com.orangeink.techtrix.R
-import com.orangeink.techtrix.databinding.FragmentRegistrationListBinding
-import com.orangeink.techtrix.misc.ui.ListActivity
-import com.orangeink.techtrix.registrations.adapter.RegistrationAdapter
-import com.orangeink.network.model.Registration
 import com.orangeink.common.constants.ScreenType
+import com.orangeink.common.navigator.IAppNavigator
+import com.orangeink.network.model.Registration
+import com.orangeink.registration.adapter.RegistrationAdapter
+import com.orangeink.registration.databinding.FragmentRegistrationListBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class RegistrationListFragment : Fragment() {
+
+    @Inject
+    lateinit var appNavigator: IAppNavigator
 
     private lateinit var binding: FragmentRegistrationListBinding
     private lateinit var data: List<Registration>
@@ -70,18 +71,19 @@ class RegistrationListFragment : Fragment() {
     private fun setupNoData() {
         binding.rvRegistration.visibility = View.GONE
         when (page) {
-            0 -> binding.emptyLayout.tvEmptyIllustration.text = getString(R.string.no_reg_done)
-            1 -> binding.emptyLayout.tvEmptyIllustration.text = getString(R.string.empty_paid_reg)
-            2 -> binding.emptyLayout.tvEmptyIllustration.text = getString(R.string.empty_unpaid_reg)
+            0 -> binding.emptyLayout.tvEmptyIllustration.text =
+                getString(com.orangeink.common.R.string.no_reg_done)
+            1 -> binding.emptyLayout.tvEmptyIllustration.text =
+                getString(com.orangeink.common.R.string.empty_paid_reg)
+            2 -> binding.emptyLayout.tvEmptyIllustration.text =
+                getString(com.orangeink.common.R.string.empty_unpaid_reg)
         }
-        binding.emptyLayout.btnEmptyIllustration.text = getString(R.string.check_all_events)
+        binding.emptyLayout.btnEmptyIllustration.text =
+            getString(com.orangeink.common.R.string.check_all_events)
         binding.emptyLayout.btnEmptyIllustration.setOnClickListener {
-            Intent(requireActivity(), ListActivity::class.java).apply {
-                putExtra(Identifier.SCREEN_TYPE, ScreenType.VIEW_ALL_EVENTS)
-                startActivity(this)
-            }
+            appNavigator.provideListActivity(requireContext(), ScreenType.VIEW_ALL_EVENTS)
         }
-        binding.emptyLayout.ivEmptyIllustration.setImageResource(R.drawable.illustration_no_reg)
+        binding.emptyLayout.ivEmptyIllustration.setImageResource(com.orangeink.common.R.drawable.illustration_no_reg)
         binding.emptyLayout.root.visibility = View.VISIBLE
     }
 

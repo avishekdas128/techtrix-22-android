@@ -34,6 +34,16 @@
                     android:paddingVertical="@dimen/padding_16">
 
                     <ImageView
+                        android:id="@+id/iv_qr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_16"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_round_qr_code_2_24"
+                        app:tint="?attr/colorOnPrimary"
+                        tools:ignore="ContentDescription" />
+
+                    <ImageView
                         android:id="@+id/iv_search"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -60,8 +70,6 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toStartOf="@id/ll_icons"
-                    android:drawablePadding="@dimen/padding_8"
-                    android:includeFontPadding="false"
                     android:text="@string/hello_guest"
                     android:textColor="?attr/colorOnPrimary"
                     android:textSize="@dimen/text_size_18" />

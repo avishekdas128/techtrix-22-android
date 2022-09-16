@@ -36,7 +36,7 @@ class TechTrixMessagingService : FirebaseMessagingService() {
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder: NotificationCompat.Builder =
             NotificationCompat.Builder(this, channelId)
-                .setSmallIcon(R.drawable.logo)
+                .setSmallIcon(com.orangeink.common.R.drawable.logo)
                 .setContentTitle(notification["title"])
                 .setContentText(notification["description"])
                 .setAutoCancel(true)

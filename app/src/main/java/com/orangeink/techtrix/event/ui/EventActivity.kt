@@ -18,7 +18,7 @@ import com.orangeink.techtrix.databinding.ActivityEventBinding
 import com.orangeink.network.model.Event
 import com.orangeink.techtrix.event.viewmodel.EventViewModel
 import com.orangeink.common.preferences.Prefs
-import com.orangeink.techtrix.registrations.ui.bottomsheet.RegisterBottomSheet
+import com.orangeink.registration.ui.bottomsheet.RegisterBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
 
 @Suppress("DEPRECATION")

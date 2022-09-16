@@ -1,5 +1,6 @@
-package com.orangeink.techtrix.registrations.ui.fragments
+package com.orangeink.registration
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,27 +8,26 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.orangeink.techtrix.R
-import com.orangeink.techtrix.MainActivity
-import com.orangeink.techtrix.databinding.FragmentRegistrationsBinding
-import com.orangeink.techtrix.login.ui.bottomsheet.LoginBottomSheet
-import com.orangeink.techtrix.login.ui.bottomsheet.ProfileBottomSheet
 import com.orangeink.common.preferences.Prefs
-import com.orangeink.techtrix.registrations.adapter.RegistrationPagerAdapter
 import com.orangeink.network.model.Registration
-import com.orangeink.techtrix.registrations.ui.bottomsheet.QRBottomSheet
-import com.orangeink.techtrix.registrations.viewmodel.RegistrationViewModel
+import com.orangeink.registration.adapter.RegistrationPagerAdapter
+import com.orangeink.registration.databinding.FragmentRegistrationsBinding
+import com.orangeink.utils.tryCast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RegistrationsFragment : Fragment() {
 
     private lateinit var binding: FragmentRegistrationsBinding
-
     private val viewModel: RegistrationViewModel by viewModels()
+
+    private var registrationInterface: RegistrationInterface? = null
+
+    interface RegistrationInterface {
+        fun openLogin()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,19 +45,25 @@ class RegistrationsFragment : Fragment() {
         subscribeToLiveData()
     }
 
-    private fun setupUI() {
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        tryCast<RegistrationInterface>(context) {
+            registrationInterface = this
+        }
+    }
+
+    fun setupUI() {
         Firebase.auth.currentUser?.let {
             Prefs(requireContext()).user?.let { participant ->
                 participant.email?.let {
                     viewModel.getRegistrations(it)
                 }
-                binding.ivQr.visibility = View.VISIBLE
                 binding.rlRegistrations.visibility = View.VISIBLE
                 binding.tvPaid.text =
                     if (participant.generalFees!!)
-                        getString(R.string.paid)
+                        getString(com.orangeink.common.R.string.paid)
                     else
-                        getString(R.string.unpaid)
+                        getString(com.orangeink.common.R.string.unpaid)
 
                 binding.layoutEmpty.root.visibility = View.GONE
             }
@@ -66,8 +72,12 @@ class RegistrationsFragment : Fragment() {
 
     private fun setupNoLogin() {
         binding.progressRegistrations.visibility = View.GONE
-        binding.layoutEmpty.btnEmptyIllustration.text = getString(R.string.login)
-        binding.layoutEmpty.tvEmptyIllustration.text = getString(R.string.no_login)
+        binding.layoutEmpty.ivEmptyIllustration
+            .setImageResource(com.orangeink.common.R.drawable.illustration_login)
+        binding.layoutEmpty.btnEmptyIllustration.text =
+            getString(com.orangeink.common.R.string.login)
+        binding.layoutEmpty.tvEmptyIllustration.text =
+            getString(com.orangeink.common.R.string.no_login)
 
         binding.layoutEmpty.root.visibility = View.VISIBLE
     }
@@ -98,38 +108,9 @@ class RegistrationsFragment : Fragment() {
     }
 
     private fun setListeners() {
-        binding.layoutEmpty.btnEmptyIllustration.setOnClickListener { openLogin() }
-        binding.ivQr.setOnClickListener {
-            val bottomSheet = QRBottomSheet()
-            bottomSheet.show(childFragmentManager, QRBottomSheet::class.java.name)
+        binding.layoutEmpty.btnEmptyIllustration.setOnClickListener {
+            registrationInterface?.openLogin()
         }
-    }
-
-    private fun openLogin() {
-        val bottomSheet = LoginBottomSheet()
-        bottomSheet.setData(object : LoginBottomSheet.LoginInterface {
-            override fun onLoginCompleted() {
-                setupUI()
-            }
-
-            override fun profileSetupNeeded(user: FirebaseUser) {
-                openProfileSetup(user)
-            }
-        })
-        bottomSheet.show(childFragmentManager, LoginBottomSheet::class.java.name)
-    }
-
-    private fun openProfileSetup(user: FirebaseUser) {
-        val bottomSheet = ProfileBottomSheet()
-        bottomSheet.setData(user, object : ProfileBottomSheet.ProfileInterface {
-            override fun profileSetupCompleted() {
-                user.photoUrl?.let {
-                    (requireActivity() as MainActivity).loadProfileImage(it)
-                }
-                setupUI()
-            }
-        })
-        bottomSheet.show(childFragmentManager, ProfileBottomSheet::class.java.name)
     }
 
 }

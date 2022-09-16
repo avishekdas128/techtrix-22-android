@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_registrations"
-        android:name="com.orangeink.techtrix.registrations.ui.fragments.RegistrationsFragment"
+        android:name="com.orangeink.registration.RegistrationsFragment"
         android:label="@string/registrations"
         tools:layout="@layout/fragment_registrations" />
 

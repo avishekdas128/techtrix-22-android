@@ -1,4 +1,4 @@
-package com.orangeink.techtrix.registrations.data.remote
+package com.orangeink.registration.data
 
 import com.orangeink.network.service.TechTrixService
 import com.orangeink.network.model.Registration

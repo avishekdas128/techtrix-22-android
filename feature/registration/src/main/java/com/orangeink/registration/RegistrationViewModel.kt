@@ -1,4 +1,4 @@
-package com.orangeink.techtrix.registrations.viewmodel
+package com.orangeink.registration
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.orangeink.network.model.SuccessResponse
 import com.orangeink.network.model.Registration
-import com.orangeink.techtrix.registrations.data.remote.RegistrationRepository
 import com.orangeink.network.Resource
+import com.orangeink.registration.data.RegistrationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

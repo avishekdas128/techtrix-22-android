@@ -55,6 +55,7 @@ dependencies {
 
     implementation(project(Modules.featureHome))
     implementation(project(Modules.featureSearch))
+    implementation(project(Modules.featureRegistration))
 
     implementation(Core.coreKtx)
     implementation(Core.appCompat)

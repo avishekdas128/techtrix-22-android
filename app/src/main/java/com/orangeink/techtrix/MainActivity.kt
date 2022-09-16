@@ -22,19 +22,25 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
 import com.orangeink.common.preferences.Prefs
+import com.orangeink.registration.RegistrationsFragment
+import com.orangeink.registration.ui.bottomsheet.QRBottomSheet
 import com.orangeink.search.SearchFragment
 import com.orangeink.techtrix.databinding.ActivityMainBinding
+import com.orangeink.techtrix.login.ui.bottomsheet.LoginBottomSheet
+import com.orangeink.techtrix.login.ui.bottomsheet.ProfileBottomSheet
 import com.orangeink.techtrix.login.viewmodel.LoginViewModel
 import com.orangeink.utils.hideKeyboard
 import com.orangeink.utils.showKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), SearchFragment.SearchInterface {
+class MainActivity : AppCompatActivity(), SearchFragment.SearchInterface,
+    RegistrationsFragment.RegistrationInterface {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navHostFragment: NavHostFragment
@@ -80,6 +86,9 @@ class MainActivity : AppCompatActivity(), SearchFragment.SearchInterface {
         when (destination.id) {
             R.id.navigation_home -> {
                 binding.searchOpenView.visibility = View.INVISIBLE
+                binding.ivMap.visibility = View.VISIBLE
+                binding.ivSearch.visibility = View.VISIBLE
+                binding.ivQr.visibility = View.GONE
                 binding.llIcons.visibility = View.VISIBLE
                 Firebase.auth.currentUser?.let {
                     Prefs(this).user?.let { participant ->
@@ -96,7 +105,14 @@ class MainActivity : AppCompatActivity(), SearchFragment.SearchInterface {
             }
             R.id.navigation_registrations -> {
                 binding.searchOpenView.visibility = View.INVISIBLE
-                binding.llIcons.visibility = View.INVISIBLE
+                Firebase.auth.currentUser?.let {
+                    Prefs(this).user?.let {
+                        binding.ivMap.visibility = View.GONE
+                        binding.ivSearch.visibility = View.GONE
+                        binding.ivQr.visibility = View.VISIBLE
+                        binding.llIcons.visibility = View.VISIBLE
+                    }
+                } ?: kotlin.run { binding.llIcons.visibility = View.INVISIBLE }
                 binding.tvHeading.text = getString(R.string.registrations)
             }
             R.id.navigation_notifications -> {
@@ -174,6 +190,10 @@ class MainActivity : AppCompatActivity(), SearchFragment.SearchInterface {
     private fun setListeners() {
         binding.ivSearch.setOnClickListener { openSearch() }
         binding.ivCloseSearch.setOnClickListener { closeSearch() }
+        binding.ivQr.setOnClickListener {
+            val bottomSheet = QRBottomSheet()
+            bottomSheet.show(supportFragmentManager, QRBottomSheet::class.java.name)
+        }
         binding.ivMap.setOnClickListener {
             val intent = Intent(
                 Intent.ACTION_VIEW,
@@ -239,6 +259,37 @@ class MainActivity : AppCompatActivity(), SearchFragment.SearchInterface {
 
     override fun updateSearchQuery(query: String) {
         binding.searchInputText.setText(query)
+    }
+
+    override fun openLogin() {
+        val bottomSheet = LoginBottomSheet()
+        bottomSheet.setData(object : LoginBottomSheet.LoginInterface {
+            override fun onLoginCompleted() {
+                val fragment = supportFragmentManager.findFragmentById(R.id.main_fragment_container)
+                if (fragment is RegistrationsFragment)
+                    fragment.setupUI()
+            }
+
+            override fun profileSetupNeeded(user: FirebaseUser) {
+                openProfileSetup(user)
+            }
+        })
+        bottomSheet.show(supportFragmentManager, LoginBottomSheet::class.java.name)
+    }
+
+    private fun openProfileSetup(user: FirebaseUser) {
+        val bottomSheet = ProfileBottomSheet()
+        bottomSheet.setData(user, object : ProfileBottomSheet.ProfileInterface {
+            override fun profileSetupCompleted() {
+                user.photoUrl?.let {
+                    loadProfileImage(it)
+                }
+                val fragment = supportFragmentManager.findFragmentById(R.id.main_fragment_container)
+                if (fragment is RegistrationsFragment)
+                    fragment.setupUI()
+            }
+        })
+        bottomSheet.show(supportFragmentManager, ProfileBottomSheet::class.java.name)
     }
 
 }
