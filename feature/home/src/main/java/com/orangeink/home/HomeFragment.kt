@@ -1,7 +1,7 @@
 package com.orangeink.home
 
+import android.content.Context
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,15 +14,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aemerse.slider.listener.CarouselListener
 import com.aemerse.slider.model.CarouselItem
-import com.orangeink.common.constants.Constants
-import com.orangeink.common.navigator.IAppNavigator
-import com.orangeink.common.constants.ScreenType
-import com.orangeink.common.preferences.Prefs
-import com.orangeink.home.databinding.FragmentHomeBinding
-import com.orangeink.home.adapter.CategoryAdapter
+import com.orangeink.common.IEventHandler
+import com.orangeink.common.UIEvent
 import com.orangeink.common.adapter.EventAdapter
+import com.orangeink.common.constants.Constants
+import com.orangeink.common.constants.ScreenType
+import com.orangeink.common.navigator.IAppNavigator
+import com.orangeink.common.preferences.Prefs
+import com.orangeink.home.adapter.CategoryAdapter
+import com.orangeink.home.databinding.FragmentHomeBinding
 import com.orangeink.network.model.Event
 import com.orangeink.network.model.HomeResponse
+import com.orangeink.utils.tryCast
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -38,6 +41,7 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
 
     private var versionCode: Int = 0
+    private var listener: IEventHandler? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,16 +59,18 @@ class HomeFragment : Fragment() {
         subscribeToLiveData()
     }
 
-    @Suppress("DEPRECATION")
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        tryCast<IEventHandler>(context) {
+            listener = this
+        }
+    }
+
     private fun initViews() {
         try {
             val pInfo =
                 requireActivity().packageManager.getPackageInfo(requireActivity().packageName, 0)
-            versionCode = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                pInfo.longVersionCode.toInt()
-            } else {
-                pInfo.versionCode
-            }
+            versionCode = pInfo.longVersionCode.toInt()
         } catch (e: PackageManager.NameNotFoundException) {
             e.printStackTrace()
         }
@@ -98,7 +104,7 @@ class HomeFragment : Fragment() {
         setupCategories(homeResponse.categories)
         setupPopularEvents(homeResponse.popular)
         setupCarousel(homeResponse.flagship)
-        //if (homeResponse.updateRequired) ForceUpdateDialog(requireContext()).show()
+        if (homeResponse.updateRequired) listener?.handleEvent(UIEvent.ShowForceUpdateDialog)
     }
 
     private fun setupCountDown() {

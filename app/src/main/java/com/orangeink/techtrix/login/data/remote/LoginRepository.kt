@@ -3,10 +3,8 @@ package com.orangeink.techtrix.login.data.remote
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.orangeink.network.service.TechTrixService
-import com.orangeink.network.model.Participant
-import com.orangeink.network.model.UpdateParticipant
 import com.orangeink.network.BaseDataSource
+import com.orangeink.network.service.TechTrixService
 import kotlinx.coroutines.tasks.await
 import timber.log.Timber
 import javax.inject.Inject
@@ -60,15 +58,7 @@ class LoginRepository @Inject constructor(
         }
     }
 
-    suspend fun createProfile(participant: Participant) = getResult {
-        service.createParticipant(participant)
-    }
-
     suspend fun getProfile(email: String) = getResult {
         service.getParticipant(email)
-    }
-
-    suspend fun updateProfile(participant: UpdateParticipant, email: String) = getResult {
-        service.updateParticipant(email, participant)
     }
 }

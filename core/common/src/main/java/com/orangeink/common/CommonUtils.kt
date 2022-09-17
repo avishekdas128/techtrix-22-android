@@ -11,6 +11,7 @@ fun findIcon(input: String): Int {
         "robotics" -> R.drawable.ic_robot
         "out of the box" -> R.drawable.ic_box
         "art facts" -> R.drawable.ic_round_color_lens_24
+        "geeks" -> R.drawable.ic_geeks
         else -> R.drawable.ic_outline_sports_esports_24
     }
 }

@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.orangeink.common.IEventHandler
+import com.orangeink.common.UIEvent
 import com.orangeink.common.preferences.Prefs
 import com.orangeink.network.model.Registration
 import com.orangeink.registration.adapter.RegistrationPagerAdapter
@@ -23,11 +25,7 @@ class RegistrationsFragment : Fragment() {
     private lateinit var binding: FragmentRegistrationsBinding
     private val viewModel: RegistrationViewModel by viewModels()
 
-    private var registrationInterface: RegistrationInterface? = null
-
-    interface RegistrationInterface {
-        fun openLogin()
-    }
+    private var listener: IEventHandler? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,8 +45,8 @@ class RegistrationsFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        tryCast<RegistrationInterface>(context) {
-            registrationInterface = this
+        tryCast<IEventHandler>(context) {
+            listener = this
         }
     }
 
@@ -109,7 +107,7 @@ class RegistrationsFragment : Fragment() {
 
     private fun setListeners() {
         binding.layoutEmpty.btnEmptyIllustration.setOnClickListener {
-            registrationInterface?.openLogin()
+            listener?.handleEvent(UIEvent.OpenLoginBottomSheet)
         }
     }
 

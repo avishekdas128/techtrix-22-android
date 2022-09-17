@@ -18,6 +18,6 @@ data class Event(
     val info: String? = null,
     val poster: String? = null,
     @Json(name = "regs_enabled") val regEnabled: Boolean? = null,
-    @Json(name = "min_participants") val minParticipant: Int? = null,
-    @Json(name = "max_participants") val maxParticipant: Int? = null,
+    @Json(name = "min_participants") val minParticipant: Int = 1,
+    @Json(name = "max_participants") val maxParticipant: Int = 1,
 )

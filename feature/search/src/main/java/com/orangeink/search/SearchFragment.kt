@@ -9,8 +9,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.orangeink.common.navigator.IAppNavigator
+import com.orangeink.common.IEventHandler
+import com.orangeink.common.UIEvent
 import com.orangeink.common.adapter.EventAdapter
+import com.orangeink.common.navigator.IAppNavigator
 import com.orangeink.common.preferences.Prefs
 import com.orangeink.network.model.Event
 import com.orangeink.search.adapter.TrendingSearchAdapter
@@ -29,11 +31,7 @@ class SearchFragment : Fragment() {
     private lateinit var binding: FragmentSearchBinding
     private val viewModel: SearchViewModel by viewModels()
 
-    private var searchInterface: SearchInterface? = null
-
-    interface SearchInterface {
-        fun updateSearchQuery(query: String)
-    }
+    private var listener: IEventHandler? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,8 +50,8 @@ class SearchFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        tryCast<SearchInterface>(context) {
-            searchInterface = this
+        tryCast<IEventHandler>(context) {
+            listener = this
         }
     }
 
@@ -63,7 +61,7 @@ class SearchFragment : Fragment() {
             val trendingAdapter =
                 TrendingSearchAdapter(list, object : TrendingSearchAdapter.TrendingInterface {
                     override fun onClick(item: String) {
-                        searchInterface?.updateSearchQuery(item)
+                        listener?.handleEvent(UIEvent.SearchQueryUpdate(item))
                         search(item)
                     }
                 })

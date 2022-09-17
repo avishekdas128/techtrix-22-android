@@ -7,11 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.orangeink.network.model.SuccessResponse
-import com.orangeink.network.model.Participant
-import com.orangeink.network.model.UpdateParticipant
-import com.orangeink.techtrix.login.data.remote.LoginRepository
 import com.orangeink.network.Resource
+import com.orangeink.network.model.Participant
+import com.orangeink.techtrix.login.data.remote.LoginRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -29,9 +27,6 @@ class LoginViewModel @Inject constructor(
 
     private val _generalFees = MutableLiveData<Participant>()
     val generalFees: LiveData<Participant> = _generalFees
-
-    private val _update = MutableLiveData<SuccessResponse>()
-    val update: LiveData<SuccessResponse> = _update
 
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
@@ -70,20 +65,6 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    fun createParticipant(participant: Participant) {
-        viewModelScope.launch {
-            when (val response = repository.createProfile(participant)) {
-                is Resource.Error -> _error.postValue(response.exception)
-                is Resource.Success -> {
-                    response.data.let {
-                        _participant.postValue(it)
-                    }
-                }
-                else -> {}
-            }
-        }
-    }
-
     fun getProfile(email: String) {
         viewModelScope.launch {
             when (val response = repository.getProfile(email)) {
@@ -91,20 +72,6 @@ class LoginViewModel @Inject constructor(
                 is Resource.Success -> {
                     response.data.let {
                         _generalFees.postValue(it)
-                    }
-                }
-                else -> {}
-            }
-        }
-    }
-
-    fun updateProfile(participant: UpdateParticipant, email: String) {
-        viewModelScope.launch {
-            when (val response = repository.updateProfile(participant, email)) {
-                is Resource.Error -> _error.postValue(response.exception)
-                is Resource.Success -> {
-                    response.data.let {
-                        _update.postValue(it)
                     }
                 }
                 else -> {}

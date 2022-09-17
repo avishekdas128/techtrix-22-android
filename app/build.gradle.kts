@@ -25,6 +25,7 @@ android {
 
     buildTypes {
         getByName("release") {
+            extra["enableCrashlytics"] = true
             isMinifyEnabled = true
             isDebuggable = false
             isShrinkResources = true
@@ -32,6 +33,11 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        getByName("debug") {
+            extra["enableCrashlytics"] = false
+            isMinifyEnabled = false
+            isDebuggable = true
         }
     }
     compileOptions {
@@ -47,7 +53,6 @@ android {
 }
 
 dependencies {
-    //TODO - Add Modules
     implementation(project(Modules.coreNetwork))
     implementation(project(Modules.coreCommon))
     implementation(project(Modules.coreDesign))
@@ -56,6 +61,11 @@ dependencies {
     implementation(project(Modules.featureHome))
     implementation(project(Modules.featureSearch))
     implementation(project(Modules.featureRegistration))
+    implementation(project(Modules.featureNotifications))
+    implementation(project(Modules.featureCategory))
+    implementation(project(Modules.featureEvent))
+    implementation(project(Modules.featureProfile))
+    implementation(project(Modules.featureList))
 
     implementation(Core.coreKtx)
     implementation(Core.appCompat)
@@ -97,9 +107,6 @@ dependencies {
     implementation(Firebase.messaging)
 
     implementation(External.timber)
-    implementation(External.circleImageView)
-    implementation(External.roundedImageView)
-    implementation(External.qrCode)
 
     implementation(Testing.junit4)
     implementation(Testing.junitAndroidExt)

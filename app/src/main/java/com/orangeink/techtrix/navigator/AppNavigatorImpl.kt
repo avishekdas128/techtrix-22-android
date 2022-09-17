@@ -2,12 +2,13 @@ package com.orangeink.techtrix.navigator
 
 import android.content.Context
 import android.content.Intent
-import com.orangeink.common.navigator.IAppNavigator
+import androidx.fragment.app.FragmentManager
+import com.orangeink.category.CategoryActivity
 import com.orangeink.common.constants.Identifier
 import com.orangeink.common.constants.ScreenType
-import com.orangeink.techtrix.category.ui.CategoryActivity
-import com.orangeink.techtrix.event.ui.EventActivity
-import com.orangeink.techtrix.misc.ui.ListActivity
+import com.orangeink.common.navigator.IAppNavigator
+import com.orangeink.list.ListActivity
+import com.orangeink.registration.ui.bottomsheet.RegisterBottomSheet
 import dagger.Reusable
 import javax.inject.Inject
 
@@ -24,7 +25,7 @@ class AppNavigatorImpl @Inject constructor() : IAppNavigator {
         eventId: Int,
         eventTitle: String?,
         eventCategory: String?
-    ): Intent = Intent(context, EventActivity::class.java).apply {
+    ): Intent = Intent(context, com.orangeink.event.EventActivity::class.java).apply {
         putExtra(Identifier.EVENT_ID, eventId)
         eventTitle?.let { putExtra(Identifier.EVENT_TITLE, it) }
         eventCategory?.let { putExtra(Identifier.EVENT_CATEGORY, it) }
@@ -34,4 +35,14 @@ class AppNavigatorImpl @Inject constructor() : IAppNavigator {
         Intent(context, ListActivity::class.java).apply {
             putExtra(Identifier.SCREEN_TYPE, screenType)
         }
+
+    override fun provideRegisterBottomSheet(
+        fragmentManager: FragmentManager,
+        eventId: Int,
+        minParticipant: Int,
+        maxParticipant: Int
+    ) {
+        val bottomSheet = RegisterBottomSheet.newInstance(eventId, minParticipant, maxParticipant)
+        bottomSheet.show(fragmentManager, RegisterBottomSheet.TAG)
+    }
 }

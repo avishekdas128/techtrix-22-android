@@ -22,7 +22,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:id="@+id/ll_icons"
@@ -41,6 +41,26 @@
                         android:background="?selectableItemBackgroundBorderless"
                         android:src="@drawable/ic_round_qr_code_2_24"
                         app:tint="?attr/colorOnPrimary"
+                        tools:ignore="ContentDescription" />
+
+                    <ImageView
+                        android:id="@+id/iv_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_16"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_round_edit_24"
+                        app:tint="?attr/colorOnPrimary"
+                        tools:ignore="ContentDescription" />
+
+                    <ImageView
+                        android:id="@+id/iv_logout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_16"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_round_logout_24"
+                        app:tint="@android:color/holo_red_light"
                         tools:ignore="ContentDescription" />
 
                     <ImageView

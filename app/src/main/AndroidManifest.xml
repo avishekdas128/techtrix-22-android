@@ -27,17 +27,17 @@
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".event.ui.EventActivity"
+            android:name="com.orangeink.event.EventActivity"
             android:exported="true" />
         <activity
-            android:name=".category.ui.CategoryActivity"
+            android:name="com.orangeink.category.CategoryActivity"
             android:exported="false" />
         <activity
-            android:name=".misc.ui.ListActivity"
+            android:name="com.orangeink.list.ListActivity"
             android:exported="false" />
 
         <service
-            android:name=".notifications.push.TechTrixMessagingService"
+            android:name="com.orangeink.techtrix.TechTrixMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

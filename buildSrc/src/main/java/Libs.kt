@@ -20,7 +20,7 @@ object Fragment {
 }
 
 object Google {
-    private const val materialVersion = "1.5.0"
+    private const val materialVersion = "1.6.1"
     const val material = "com.google.android.material:material:$materialVersion"
 
     private const val googleAuthVersion = "20.2.0"

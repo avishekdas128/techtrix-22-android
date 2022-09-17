@@ -26,21 +26,26 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
+import com.orangeink.common.IEventHandler
+import com.orangeink.common.UIEvent
 import com.orangeink.common.preferences.Prefs
+import com.orangeink.profile.ProfileFragment
+import com.orangeink.profile.ui.LogoutDialog
+import com.orangeink.profile.ui.bottomsheet.ProfileBottomSheet
+import com.orangeink.profile.ui.bottomsheet.ProfileEditBottomSheet
 import com.orangeink.registration.RegistrationsFragment
 import com.orangeink.registration.ui.bottomsheet.QRBottomSheet
 import com.orangeink.search.SearchFragment
 import com.orangeink.techtrix.databinding.ActivityMainBinding
 import com.orangeink.techtrix.login.ui.bottomsheet.LoginBottomSheet
-import com.orangeink.techtrix.login.ui.bottomsheet.ProfileBottomSheet
 import com.orangeink.techtrix.login.viewmodel.LoginViewModel
+import com.orangeink.techtrix.util.ForceUpdateDialog
 import com.orangeink.utils.hideKeyboard
 import com.orangeink.utils.showKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), SearchFragment.SearchInterface,
-    RegistrationsFragment.RegistrationInterface {
+class MainActivity : AppCompatActivity(), IEventHandler {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navHostFragment: NavHostFragment
@@ -83,12 +88,17 @@ class MainActivity : AppCompatActivity(), SearchFragment.SearchInterface,
     }
 
     private fun setupToolbar(destination: NavDestination) {
+        binding.searchOpenView.visibility = View.INVISIBLE
+        binding.llIcons.visibility = View.INVISIBLE
+        binding.ivMap.visibility = View.GONE
+        binding.ivSearch.visibility = View.GONE
+        binding.ivQr.visibility = View.GONE
+        binding.ivEdit.visibility = View.GONE
+        binding.ivLogout.visibility = View.GONE
         when (destination.id) {
             R.id.navigation_home -> {
-                binding.searchOpenView.visibility = View.INVISIBLE
                 binding.ivMap.visibility = View.VISIBLE
                 binding.ivSearch.visibility = View.VISIBLE
-                binding.ivQr.visibility = View.GONE
                 binding.llIcons.visibility = View.VISIBLE
                 Firebase.auth.currentUser?.let {
                     Prefs(this).user?.let { participant ->
@@ -104,25 +114,25 @@ class MainActivity : AppCompatActivity(), SearchFragment.SearchInterface,
                 }
             }
             R.id.navigation_registrations -> {
-                binding.searchOpenView.visibility = View.INVISIBLE
                 Firebase.auth.currentUser?.let {
                     Prefs(this).user?.let {
-                        binding.ivMap.visibility = View.GONE
-                        binding.ivSearch.visibility = View.GONE
                         binding.ivQr.visibility = View.VISIBLE
                         binding.llIcons.visibility = View.VISIBLE
                     }
-                } ?: kotlin.run { binding.llIcons.visibility = View.INVISIBLE }
+                }
                 binding.tvHeading.text = getString(R.string.registrations)
             }
             R.id.navigation_notifications -> {
-                binding.searchOpenView.visibility = View.INVISIBLE
-                binding.llIcons.visibility = View.INVISIBLE
                 binding.tvHeading.text = getString(R.string.notifications)
             }
             R.id.navigation_profile -> {
-                binding.searchOpenView.visibility = View.INVISIBLE
-                binding.llIcons.visibility = View.INVISIBLE
+                Firebase.auth.currentUser?.let {
+                    Prefs(this).user?.let {
+                        binding.ivEdit.visibility = View.VISIBLE
+                        binding.ivLogout.visibility = View.VISIBLE
+                        binding.llIcons.visibility = View.VISIBLE
+                    }
+                }
                 binding.tvHeading.text = getString(R.string.profile)
             }
             R.id.navigation_search -> {
@@ -154,15 +164,15 @@ class MainActivity : AppCompatActivity(), SearchFragment.SearchInterface,
         }
     }
 
-    fun loadProfileImage(uri: Uri) {
+    private fun loadProfileImage(uri: Uri) {
         Glide.with(this)
             .asBitmap()
             .load(uri)
             .apply(
                 RequestOptions
                     .circleCropTransform()
-                    .placeholder(R.drawable.dummy_avatar)
-                    .error(R.drawable.dummy_avatar)
+                    .placeholder(com.orangeink.common.R.drawable.dummy_avatar)
+                    .error(com.orangeink.common.R.drawable.dummy_avatar)
             )
             .into((object : CustomTarget<Bitmap>() {
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
@@ -178,13 +188,14 @@ class MainActivity : AppCompatActivity(), SearchFragment.SearchInterface,
             }))
     }
 
-    fun removeProfileImage() {
+    private fun removeProfileImage() {
         val menuItem = binding.bottomNavigation.menu.findItem(R.id.navigation_profile)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             menuItem?.iconTintList = null
             menuItem?.iconTintMode = null
         }
-        menuItem?.icon = ContextCompat.getDrawable(this, R.drawable.dummy_avatar)
+        menuItem?.icon =
+            ContextCompat.getDrawable(this, com.orangeink.common.R.drawable.dummy_avatar)
     }
 
     private fun setListeners() {
@@ -200,6 +211,23 @@ class MainActivity : AppCompatActivity(), SearchFragment.SearchInterface,
                 Uri.parse(getString(com.orangeink.common.R.string.map_location))
             )
             startActivity(intent)
+        }
+        binding.ivEdit.setOnClickListener {
+            val bottomSheet = ProfileEditBottomSheet()
+            bottomSheet.show(supportFragmentManager, ProfileEditBottomSheet.TAG)
+        }
+        binding.ivLogout.setOnClickListener {
+            LogoutDialog(this, object : LogoutDialog.DialogInterface {
+                override fun onLogoutClicked() {
+                    Firebase.auth.signOut()
+                    Prefs(this@MainActivity).logout()
+                    removeProfileImage()
+                    val fragment =
+                        supportFragmentManager.findFragmentById(R.id.main_fragment_container)
+                    if (fragment is ProfileFragment)
+                        fragment.setupGuestMode()
+                }
+            }).show()
         }
     }
 
@@ -252,44 +280,57 @@ class MainActivity : AppCompatActivity(), SearchFragment.SearchInterface,
         }
     }
 
+    override fun handleEvent(event: UIEvent) {
+        when (event) {
+            UIEvent.ShowForceUpdateDialog -> ForceUpdateDialog(this).show()
+            is UIEvent.SearchQueryUpdate -> binding.searchInputText.setText(event.query)
+            UIEvent.OpenLoginBottomSheet -> {
+                val bottomSheet = LoginBottomSheet()
+                bottomSheet.setData(object : LoginBottomSheet.LoginInterface {
+                    override fun onLoginCompleted() {
+                        val fragment =
+                            supportFragmentManager.findFragmentById(R.id.main_fragment_container)
+                        if (fragment is RegistrationsFragment)
+                            fragment.setupUI()
+                        else if (fragment is ProfileFragment)
+                            fragment.setupUI()
+                    }
+
+                    override fun profileSetupNeeded(user: FirebaseUser) {
+                        handleEvent(UIEvent.OpenProfileSetupBottomSheet(user))
+                    }
+                })
+                bottomSheet.show(supportFragmentManager, LoginBottomSheet::class.java.name)
+            }
+            is UIEvent.OpenProfileSetupBottomSheet -> {
+                val user = event.user
+                user.photoUrl?.let { loadProfileImage(it) }
+                val bottomSheet =
+                    ProfileBottomSheet.newInstance(
+                        user.uid,
+                        user.email ?: "",
+                        user.displayName ?: ""
+                    )
+                bottomSheet.show(supportFragmentManager, ProfileBottomSheet.TAG)
+            }
+            UIEvent.ProfileSetupCompleted -> {
+                val fragment = supportFragmentManager.findFragmentById(R.id.main_fragment_container)
+                if (fragment is RegistrationsFragment)
+                    fragment.setupUI()
+                else if (fragment is ProfileFragment)
+                    fragment.setupUI()
+            }
+            UIEvent.ProfileEditCompleted -> {
+                val fragment = supportFragmentManager.findFragmentById(R.id.main_fragment_container)
+                if (fragment is ProfileFragment)
+                    fragment.setupUI()
+            }
+        }
+    }
+
     override fun onBackPressed() {
         super.onBackPressed()
-        closeSearch()
+        if (binding.searchOpenView.visibility == View.VISIBLE)
+            closeSearch()
     }
-
-    override fun updateSearchQuery(query: String) {
-        binding.searchInputText.setText(query)
-    }
-
-    override fun openLogin() {
-        val bottomSheet = LoginBottomSheet()
-        bottomSheet.setData(object : LoginBottomSheet.LoginInterface {
-            override fun onLoginCompleted() {
-                val fragment = supportFragmentManager.findFragmentById(R.id.main_fragment_container)
-                if (fragment is RegistrationsFragment)
-                    fragment.setupUI()
-            }
-
-            override fun profileSetupNeeded(user: FirebaseUser) {
-                openProfileSetup(user)
-            }
-        })
-        bottomSheet.show(supportFragmentManager, LoginBottomSheet::class.java.name)
-    }
-
-    private fun openProfileSetup(user: FirebaseUser) {
-        val bottomSheet = ProfileBottomSheet()
-        bottomSheet.setData(user, object : ProfileBottomSheet.ProfileInterface {
-            override fun profileSetupCompleted() {
-                user.photoUrl?.let {
-                    loadProfileImage(it)
-                }
-                val fragment = supportFragmentManager.findFragmentById(R.id.main_fragment_container)
-                if (fragment is RegistrationsFragment)
-                    fragment.setupUI()
-            }
-        })
-        bottomSheet.show(supportFragmentManager, ProfileBottomSheet::class.java.name)
-    }
-
 }

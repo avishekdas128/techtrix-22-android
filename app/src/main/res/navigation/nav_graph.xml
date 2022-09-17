@@ -19,13 +19,13 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.orangeink.techtrix.notifications.ui.fragments.NotificationFragment"
+        android:name="com.orangeink.notifications.NotificationFragment"
         android:label="@string/notifications"
         tools:layout="@layout/fragment_notification" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.orangeink.techtrix.profile.ui.fragment.ProfileFragment"
+        android:name="com.orangeink.profile.ProfileFragment"
         android:label="@string/profile"
         tools:layout="@layout/fragment_profile" />
 

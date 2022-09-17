@@ -15,7 +15,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.orangeink.common.preferences.Prefs
 import com.orangeink.design.RoundedBottomSheet
-import com.orangeink.network.model.Event
 import com.orangeink.network.model.Registration
 import com.orangeink.registration.R
 import com.orangeink.registration.RegistrationViewModel
@@ -27,20 +26,32 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class RegisterBottomSheet : RoundedBottomSheet() {
 
+    companion object {
+        const val TAG = "RegisterBottomSheet"
+
+        private const val EVENT_ID = "event_id"
+        private const val EVENT_MIN_PARTICIPANT = "event_min_participant"
+        private const val EVENT_MAX_PARTICIPANT = "event_max_participant"
+
+        fun newInstance(
+            eventId: Int,
+            minParticipant: Int,
+            maxParticipant: Int
+        ): RegisterBottomSheet = RegisterBottomSheet().apply {
+            arguments = Bundle().apply {
+                putInt(EVENT_ID, eventId)
+                putInt(EVENT_MIN_PARTICIPANT, minParticipant)
+                putInt(EVENT_MAX_PARTICIPANT, maxParticipant)
+            }
+        }
+    }
+
     private lateinit var binding: BottomsheetRegisterBinding
     private val viewModel: RegistrationViewModel by viewModels()
 
-    private lateinit var data: Event
-    private lateinit var registerInterface: RegisterInterface
-
-    interface RegisterInterface {
-        fun onRegistrationCompleted()
-    }
-
-    fun setData(data: Event, registerInterface: RegisterInterface) {
-        this.data = data
-        this.registerInterface = registerInterface
-    }
+    private var eventId: Int = -1
+    private var minParticipant: Int = 1
+    private var maxParticipant: Int = 1
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
@@ -76,15 +87,24 @@ class RegisterBottomSheet : RoundedBottomSheet() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initArguments()
         initViews()
         setListeners()
         subscribeToLiveData()
     }
 
+    private fun initArguments() {
+        arguments?.let {
+            eventId = it.getInt(EVENT_ID, -1)
+            minParticipant = it.getInt(EVENT_MIN_PARTICIPANT, 1)
+            maxParticipant = it.getInt(EVENT_MAX_PARTICIPANT, 1)
+        }
+    }
+
     private fun initViews() {
         val email = Prefs(requireContext()).user?.email
         addMember(email, binding.llMember)
-        data.minParticipant?.let { repeat(it - 1) { addMember(null, binding.llMember) } }
+        repeat(minParticipant - 1) { addMember(null, binding.llMember) }
         showKeyboard(requireContext(), binding.etTeamName)
         binding.etTeamName.requestFocus()
     }
@@ -97,7 +117,7 @@ class RegisterBottomSheet : RoundedBottomSheet() {
             }
         }
         binding.ivAdd.setOnClickListener {
-            if (binding.llMember.childCount < data.maxParticipant!!)
+            if (binding.llMember.childCount < maxParticipant)
                 addMember(null, binding.llMember)
             else
                 Toast.makeText(
@@ -107,7 +127,7 @@ class RegisterBottomSheet : RoundedBottomSheet() {
                 ).show()
         }
         binding.ivRemove.setOnClickListener {
-            if (binding.llMember.childCount > data.minParticipant!!)
+            if (binding.llMember.childCount > minParticipant)
                 removeMember(binding.llMember)
             else
                 Toast.makeText(
@@ -135,7 +155,11 @@ class RegisterBottomSheet : RoundedBottomSheet() {
         viewModel.createdRegistration.observe(viewLifecycleOwner) {
             if (it.success!!) {
                 binding.progressProfile.visibility = View.GONE
-                registerInterface.onRegistrationCompleted()
+                Toast.makeText(
+                    requireContext(),
+                    getString(com.orangeink.common.R.string.reg_success),
+                    Toast.LENGTH_SHORT
+                ).show()
                 dismiss()
             } else {
                 Toast.makeText(
@@ -175,6 +199,6 @@ class RegisterBottomSheet : RoundedBottomSheet() {
             binding.etTeamName.text.toString()
         else
             participant.first()
-        return Registration(data.id.toString(), participant, false, teamName)
+        return Registration(id.toString(), participant, false, teamName)
     }
 }
