@@ -1,16 +1,8 @@
 package com.orangeink.notifications.data
 
-import com.orangeink.network.service.NotificationService
-import com.orangeink.network.BaseDataSource
-import javax.inject.Inject
-import javax.inject.Singleton
+import com.orangeink.network.Resource
+import com.orangeink.network.model.Notification
 
-@Singleton
-class NotificationRepository @Inject constructor(
-    private val service: NotificationService
-) : BaseDataSource() {
-
-    suspend fun getNotifications() = getResult {
-        service.getNotifications()
-    }
+interface NotificationRepository {
+    suspend fun getNotifications(): Resource<List<Notification>>
 }

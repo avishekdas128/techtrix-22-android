@@ -1,22 +1,11 @@
 package com.orangeink.registration.data
 
-import com.orangeink.network.service.TechTrixService
+import com.orangeink.network.Resource
 import com.orangeink.network.model.Registration
-import com.orangeink.network.BaseDataSource
-import javax.inject.Inject
-import javax.inject.Singleton
+import com.orangeink.network.model.SuccessResponse
 
-@Singleton
-class RegistrationRepository @Inject constructor(
-    private val service: TechTrixService
-) : BaseDataSource() {
+interface RegistrationRepository {
+    suspend fun getRegistrations(email: String): Resource<List<Registration>>
 
-    suspend fun getRegistrations(email: String) = getResult {
-        service.getRegistrations(email)
-    }
-
-    suspend fun register(registration: Registration) = getResult {
-        service.register(registration)
-    }
-
+    suspend fun register(registration: Registration): Resource<SuccessResponse>
 }

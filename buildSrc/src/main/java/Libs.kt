@@ -12,6 +12,9 @@ object Core {
     private const val swipeRefreshLayoutVersion = "1.1.0"
     const val swipeRefresh =
         "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshLayoutVersion"
+
+    private const val splashScreenVersion = "1.0.0-beta02"
+    const val splashScreen = "androidx.core:core-splashscreen:$splashScreenVersion"
 }
 
 object Fragment {
@@ -56,7 +59,7 @@ object Retrofit {
 }
 
 object Hilt {
-    private const val hiltVersion = "2.42"
+    private const val hiltVersion = "2.43.2"
     const val android = "com.google.dagger:hilt-android:$hiltVersion"
     const val compiler = "com.google.dagger:hilt-compiler:$hiltVersion"
 }

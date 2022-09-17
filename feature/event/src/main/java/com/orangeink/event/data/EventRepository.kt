@@ -1,17 +1,8 @@
 package com.orangeink.event.data
 
-import com.orangeink.network.service.TechTrixService
-import com.orangeink.network.BaseDataSource
-import javax.inject.Inject
-import javax.inject.Singleton
+import com.orangeink.network.Resource
+import com.orangeink.network.model.Event
 
-@Singleton
-class EventRepository @Inject constructor(
-    private val service: TechTrixService
-) : BaseDataSource() {
-
-    suspend fun getEventDetails(eventId: Int) = getResult {
-        service.eventDetails(eventId)
-    }
-
+interface EventRepository {
+    suspend fun getEventDetails(eventId: Int): Resource<Event>
 }

@@ -14,6 +14,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
@@ -22,13 +23,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
 import com.orangeink.common.IEventHandler
 import com.orangeink.common.UIEvent
 import com.orangeink.common.preferences.Prefs
+import com.orangeink.login.LoginBottomSheet
+import com.orangeink.login.LoginViewModel
 import com.orangeink.profile.ProfileFragment
 import com.orangeink.profile.ui.LogoutDialog
 import com.orangeink.profile.ui.bottomsheet.ProfileBottomSheet
@@ -37,9 +39,7 @@ import com.orangeink.registration.RegistrationsFragment
 import com.orangeink.registration.ui.bottomsheet.QRBottomSheet
 import com.orangeink.search.SearchFragment
 import com.orangeink.techtrix.databinding.ActivityMainBinding
-import com.orangeink.techtrix.login.ui.bottomsheet.LoginBottomSheet
-import com.orangeink.techtrix.login.viewmodel.LoginViewModel
-import com.orangeink.techtrix.util.ForceUpdateDialog
+import com.orangeink.techtrix.update.ForceUpdateDialog
 import com.orangeink.utils.hideKeyboard
 import com.orangeink.utils.showKeyboard
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity(), IEventHandler {
     private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -71,6 +72,8 @@ class MainActivity : AppCompatActivity(), IEventHandler {
     }
 
     private fun initViews() {
+        Prefs(this).home = null
+        Prefs(this).notifications = null
         setupBottomNav()
         Firebase.messaging.subscribeToTopic("event_reminder").addOnCompleteListener {
             Prefs(this).notificationEventReminder = it.isSuccessful
@@ -280,28 +283,22 @@ class MainActivity : AppCompatActivity(), IEventHandler {
         }
     }
 
+    private fun updateUI() {
+        when (val fragment =
+            supportFragmentManager.findFragmentById(R.id.main_fragment_container)) {
+            is ProfileFragment -> fragment.setupUI()
+            is RegistrationsFragment -> fragment.setupUI()
+        }
+    }
+
     override fun handleEvent(event: UIEvent) {
         when (event) {
             UIEvent.ShowForceUpdateDialog -> ForceUpdateDialog(this).show()
+            UIEvent.ProfileSetupCompleted -> updateUI()
+            UIEvent.ProfileEditCompleted -> updateUI()
+            UIEvent.OpenLoginBottomSheet ->
+                LoginBottomSheet().show(supportFragmentManager, LoginBottomSheet.TAG)
             is UIEvent.SearchQueryUpdate -> binding.searchInputText.setText(event.query)
-            UIEvent.OpenLoginBottomSheet -> {
-                val bottomSheet = LoginBottomSheet()
-                bottomSheet.setData(object : LoginBottomSheet.LoginInterface {
-                    override fun onLoginCompleted() {
-                        val fragment =
-                            supportFragmentManager.findFragmentById(R.id.main_fragment_container)
-                        if (fragment is RegistrationsFragment)
-                            fragment.setupUI()
-                        else if (fragment is ProfileFragment)
-                            fragment.setupUI()
-                    }
-
-                    override fun profileSetupNeeded(user: FirebaseUser) {
-                        handleEvent(UIEvent.OpenProfileSetupBottomSheet(user))
-                    }
-                })
-                bottomSheet.show(supportFragmentManager, LoginBottomSheet::class.java.name)
-            }
             is UIEvent.OpenProfileSetupBottomSheet -> {
                 val user = event.user
                 user.photoUrl?.let { loadProfileImage(it) }
@@ -312,18 +309,6 @@ class MainActivity : AppCompatActivity(), IEventHandler {
                         user.displayName ?: ""
                     )
                 bottomSheet.show(supportFragmentManager, ProfileBottomSheet.TAG)
-            }
-            UIEvent.ProfileSetupCompleted -> {
-                val fragment = supportFragmentManager.findFragmentById(R.id.main_fragment_container)
-                if (fragment is RegistrationsFragment)
-                    fragment.setupUI()
-                else if (fragment is ProfileFragment)
-                    fragment.setupUI()
-            }
-            UIEvent.ProfileEditCompleted -> {
-                val fragment = supportFragmentManager.findFragmentById(R.id.main_fragment_container)
-                if (fragment is ProfileFragment)
-                    fragment.setupUI()
             }
         }
     }

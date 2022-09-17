@@ -1,25 +1,14 @@
 package com.orangeink.list.data
 
-import com.orangeink.network.service.TechTrixService
-import com.orangeink.network.BaseDataSource
-import javax.inject.Inject
-import javax.inject.Singleton
+import com.orangeink.network.Resource
+import com.orangeink.network.model.Event
+import com.orangeink.network.model.Sponsor
+import com.orangeink.network.model.Team
 
-@Singleton
-class ListRepository @Inject constructor(
-    private val service: TechTrixService
-) : BaseDataSource() {
+interface ListRepository {
+    suspend fun getAllEvents(): Resource<List<Event>>
 
-    suspend fun getAllEvents() = getResult {
-        service.allEvents()
-    }
+    suspend fun getAllSponsor(): Resource<List<Sponsor>>
 
-    suspend fun getAllSponsor() = getResult {
-        service.allSponsors()
-    }
-
-    suspend fun getAllTeam() = getResult {
-        service.allTeam()
-    }
-
+    suspend fun getAllTeam(): Resource<List<Team>>
 }

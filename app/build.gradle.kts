@@ -52,6 +52,10 @@ android {
     }
 }
 
+kapt {
+    correctErrorTypes = true
+}
+
 dependencies {
     implementation(project(Modules.coreNetwork))
     implementation(project(Modules.coreCommon))
@@ -66,21 +70,19 @@ dependencies {
     implementation(project(Modules.featureEvent))
     implementation(project(Modules.featureProfile))
     implementation(project(Modules.featureList))
+    implementation(project(Modules.featureLogin))
 
     implementation(Core.coreKtx)
     implementation(Core.appCompat)
     implementation(Core.constraintLayout)
+    implementation(Core.splashScreen)
+
+    implementation(Fragment.fragmentKtx)
 
     implementation(Google.material)
-    implementation(Google.googleAuth)
 
     implementation(Navigation.fragment)
     implementation(Navigation.ui)
-
-    implementation(Retrofit.retrofit)
-    implementation(Retrofit.moshiConverter)
-    implementation(Retrofit.okHttp)
-    implementation(Retrofit.okHttpLoggingInterceptor)
 
     implementation(Coroutines.core)
     implementation(Coroutines.android)
@@ -90,9 +92,6 @@ dependencies {
     implementation(Lifecycle.viewModel)
     implementation(Lifecycle.runtime)
     implementation(Lifecycle.extension)
-
-    implementation(Moshi.moshi)
-    kapt(Moshi.codegen)
 
     implementation(Hilt.android)
     kapt(Hilt.compiler)

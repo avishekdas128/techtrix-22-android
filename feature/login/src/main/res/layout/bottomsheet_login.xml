@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet"
+    android:backgroundTint="?colorSurface"
+    android:paddingHorizontal="@dimen/padding_16"
+    android:paddingBottom="@dimen/padding_16">
+
+    <View
+        android:id="@+id/handle"
+        android:layout_width="25dp"
+        android:layout_height="@dimen/padding_4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_8"
+        android:background="@drawable/bg_rounded_secondary"
+        android:backgroundTint="?colorSecondaryVariant" />
+
+    <TextView
+        android:id="@+id/tv_email_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/handle"
+        android:layout_marginTop="@dimen/margin_16"
+        android:gravity="center_vertical"
+        android:text="@string/email"
+        android:textColor="?colorOnPrimary"
+        android:textSize="@dimen/text_size_12" />
+
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_email_heading"
+        android:layout_marginTop="@dimen/margin_8"
+        android:background="@drawable/bg_edit_text"
+        android:gravity="center_vertical"
+        android:hint="@string/email"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        android:paddingHorizontal="@dimen/padding_12"
+        android:paddingVertical="@dimen/padding_8"
+        android:textColor="?colorOnPrimary"
+        android:textCursorDrawable="@null"
+        android:textSize="@dimen/text_size_12" />
+
+    <TextView
+        android:id="@+id/tv_password_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_email"
+        android:layout_marginTop="@dimen/margin_12"
+        android:gravity="center_vertical"
+        android:text="@string/password"
+        android:textColor="?colorOnPrimary"
+        android:textSize="@dimen/text_size_12" />
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_password_heading"
+        android:layout_marginTop="@dimen/margin_8"
+        android:background="@drawable/bg_edit_text"
+        android:gravity="center_vertical"
+        android:hint="@string/password"
+        android:imeOptions="actionDone"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        android:paddingHorizontal="@dimen/padding_12"
+        android:paddingVertical="@dimen/padding_8"
+        android:textColor="?colorOnPrimary"
+        android:textCursorDrawable="@null"
+        android:textSize="@dimen/text_size_12" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@id/et_password"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/margin_12"
+        android:backgroundTint="@color/purple_400"
+        android:elevation="0dp"
+        android:includeFontPadding="false"
+        android:minWidth="0dp"
+        android:paddingHorizontal="@dimen/padding_16"
+        android:stateListAnimator="@null"
+        android:text="@string/login"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_10"
+        app:cornerRadius="@dimen/radius_5" />
+
+    <FrameLayout
+        android:id="@+id/btn_google"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_login"
+        android:layout_marginTop="@dimen/margin_8"
+        android:background="@drawable/bg_round_borders"
+        android:paddingVertical="@dimen/padding_8">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawablePadding="@dimen/padding_12"
+            android:gravity="center_vertical"
+            android:text="@string/continue_with_google"
+            android:textColor="?colorOnPrimary"
+            android:textSize="@dimen/text_size_13"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_google" />
+
+    </FrameLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="@color/purple_400"
+        android:visibility="gone" />
+
+</RelativeLayout>

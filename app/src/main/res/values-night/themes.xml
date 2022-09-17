@@ -16,8 +16,10 @@
         <item name="android:windowAnimationStyle">@style/WindowAnimationStyle</item>
     </style>
 
-    <style name="SplashTheme" parent="Theme.TechTrix22">
-        <item name="android:windowBackground">@drawable/splash_background</item>
+    <style name="SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/purple_400</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_background</item>
+        <item name="postSplashScreenTheme">@style/Theme.TechTrix22</item>
     </style>
 
     <style name="WindowAnimationStyle">

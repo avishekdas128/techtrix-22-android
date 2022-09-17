@@ -12,4 +12,5 @@ object Modules {
     const val featureEvent = ":feature:event"
     const val featureProfile = ":feature:profile"
     const val featureList = ":feature:list"
+    const val featureLogin = ":feature:login"
 }

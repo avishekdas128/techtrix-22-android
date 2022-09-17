@@ -26,14 +26,12 @@ android {
         release {
             ext.enableCrashlytics = true
             minifyEnabled true
-            shrinkResources true
             debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
             ext.enableCrashlytics = false
             minifyEnabled false
-            shrinkResources false
             debuggable true
         }
     }
@@ -49,6 +47,10 @@ android {
     buildFeatures {
         viewBinding true
     }
+}
+
+kapt {
+    correctErrorTypes true
 }
 
 dependencies {
