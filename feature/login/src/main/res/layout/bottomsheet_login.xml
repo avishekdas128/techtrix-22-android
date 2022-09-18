@@ -80,8 +80,6 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_below="@id/et_password"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
         android:layout_marginTop="@dimen/margin_12"
         android:backgroundTint="@color/purple_400"
         android:elevation="0dp"

@@ -18,7 +18,7 @@ object Core {
 }
 
 object Fragment {
-    private const val fragmentVersion = "1.4.1"
+    private const val fragmentVersion = "1.5.2"
     const val fragmentKtx = "androidx.fragment:fragment-ktx:$fragmentVersion"
 }
 
@@ -72,7 +72,7 @@ object Glide {
 }
 
 object Moshi {
-    private const val moshiVersion = "1.13.0"
+    private const val moshiVersion = "1.14.0"
 
     const val moshi = "com.squareup.moshi:moshi-kotlin:$moshiVersion"
     const val codegen = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"

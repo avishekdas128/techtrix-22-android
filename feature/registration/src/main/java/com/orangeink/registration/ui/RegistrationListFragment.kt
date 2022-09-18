@@ -81,7 +81,12 @@ class RegistrationListFragment : Fragment() {
         binding.emptyLayout.btnEmptyIllustration.text =
             getString(com.orangeink.common.R.string.check_all_events)
         binding.emptyLayout.btnEmptyIllustration.setOnClickListener {
-            appNavigator.provideListActivity(requireContext(), ScreenType.VIEW_ALL_EVENTS)
+            startActivity(
+                appNavigator.provideListActivity(
+                    requireContext(),
+                    ScreenType.VIEW_ALL_EVENTS
+                )
+            )
         }
         binding.emptyLayout.ivEmptyIllustration.setImageResource(com.orangeink.common.R.drawable.illustration_no_reg)
         binding.emptyLayout.root.visibility = View.VISIBLE

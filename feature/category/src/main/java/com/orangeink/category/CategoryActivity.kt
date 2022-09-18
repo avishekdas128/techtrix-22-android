@@ -72,11 +72,13 @@ class CategoryActivity : AppCompatActivity() {
                 EventAdapter(list, object : EventAdapter.EventInterface {
                     override fun onClick(item: Event) {
                         item.id?.let { id ->
-                            appNavigator.provideEventActivity(
-                                this@CategoryActivity,
-                                id,
-                                item.name,
-                                item.category
+                            startActivity(
+                                appNavigator.provideEventActivity(
+                                    this@CategoryActivity,
+                                    id,
+                                    item.name,
+                                    item.category
+                                )
                             )
                         }
                     }

@@ -225,10 +225,7 @@ class MainActivity : AppCompatActivity(), IEventHandler {
                     Firebase.auth.signOut()
                     Prefs(this@MainActivity).logout()
                     removeProfileImage()
-                    val fragment =
-                        supportFragmentManager.findFragmentById(R.id.main_fragment_container)
-                    if (fragment is ProfileFragment)
-                        fragment.setupGuestMode()
+                    updateUI("guest")
                 }
             }).show()
         }
@@ -238,9 +235,7 @@ class MainActivity : AppCompatActivity(), IEventHandler {
         binding.searchInputText.setText("")
         binding.searchInputText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                val fragment = supportFragmentManager.findFragmentById(R.id.main_fragment_container)
-                if (fragment is SearchFragment)
-                    fragment.search(binding.searchInputText.text.toString())
+                updateUI(binding.searchInputText.text.toString())
                 return@setOnEditorActionListener true
             }
             false
@@ -283,11 +278,20 @@ class MainActivity : AppCompatActivity(), IEventHandler {
         }
     }
 
-    private fun updateUI() {
-        when (val fragment =
-            supportFragmentManager.findFragmentById(R.id.main_fragment_container)) {
-            is ProfileFragment -> fragment.setupUI()
+    private fun updateUI(data: String = "") {
+        when (val fragment = navHostFragment.childFragmentManager.fragments.first()) {
+            is ProfileFragment ->
+                if (data == "guest") {
+                    binding.ivEdit.visibility = View.GONE
+                    binding.ivLogout.visibility = View.GONE
+                    fragment.setupGuestMode()
+                } else {
+                    binding.ivEdit.visibility = View.VISIBLE
+                    binding.ivLogout.visibility = View.VISIBLE
+                    fragment.setupUI()
+                }
             is RegistrationsFragment -> fragment.setupUI()
+            is SearchFragment -> fragment.search(data)
         }
     }
 

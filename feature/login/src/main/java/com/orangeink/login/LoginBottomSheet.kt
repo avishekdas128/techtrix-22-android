@@ -1,6 +1,7 @@
 package com.orangeink.login
 
 import android.app.Activity
+import android.content.Context
 import android.content.IntentSender
 import android.os.Bundle
 import android.view.KeyEvent
@@ -26,6 +27,7 @@ import com.orangeink.design.RoundedBottomSheet
 import com.orangeink.login.databinding.BottomsheetLoginBinding
 import com.orangeink.utils.hideKeyboard
 import com.orangeink.utils.isValidEmail
+import com.orangeink.utils.tryCast
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -60,6 +62,13 @@ class LoginBottomSheet : RoundedBottomSheet() {
         setListeners()
         setupGoogleLogin()
         subscribeToLiveData()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        tryCast<IEventHandler>(context) {
+            listener = this
+        }
     }
 
     private fun setListeners() {

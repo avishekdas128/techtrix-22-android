@@ -78,11 +78,13 @@ class SearchFragment : Fragment() {
             val eventAdapter = EventAdapter(list, object : EventAdapter.EventInterface {
                 override fun onClick(item: Event) {
                     item.id?.let { id ->
-                        appNavigator.provideEventActivity(
-                            requireContext(),
-                            id,
-                            item.name,
-                            item.category
+                        startActivity(
+                            appNavigator.provideEventActivity(
+                                requireContext(),
+                                id,
+                                item.name,
+                                item.category
+                            )
                         )
                     }
                 }

@@ -30,13 +30,13 @@ class Prefs(context: Context) {
 
     var user: Participant?
         get() = moshi.adapter(Participant::class.java)
-            .fromJson(preferences.getString(userPref, "").toString())
+            .fromJson(preferences.getString(userPref, null).toString())
         set(value) = preferences.edit()
             .putString(userPref, moshi.adapter(Participant::class.java).toJson(value)).apply()
 
     var home: HomeResponse?
         get() = moshi.adapter(HomeResponse::class.java)
-            .fromJson(preferences.getString(homePref, "").toString())
+            .fromJson(preferences.getString(homePref, null).toString())
         set(value) = preferences.edit()
             .putString(homePref, moshi.adapter(HomeResponse::class.java).toJson(value)).apply()
 
@@ -47,7 +47,7 @@ class Prefs(context: Context) {
                 Notification::class.java
             )
         ).fromJson(
-            preferences.getString(notificationPref, "").toString()
+            preferences.getString(notificationPref, null).toString()
         )
         set(value) = preferences.edit().putString(
             notificationPref, moshi.adapter<List<Notification>>(
@@ -65,7 +65,7 @@ class Prefs(context: Context) {
                 String::class.java
             )
         ).fromJson(
-            preferences.getString(trendingSearch, "").toString()
+            preferences.getString(trendingSearch, null).toString()
         )
         set(value) = preferences.edit().putString(
             trendingSearch, moshi.adapter<List<String>>(
