@@ -1,22 +1,10 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath(Build.androidBuildTools)
-        classpath(Build.kotlinGradlePlugin)
-        classpath(Build.hiltAndroidGradlePlugin)
-
-        classpath(Build.googleServicesGradlePlugin)
-        classpath(Build.crashlyticsPlugin)
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10")
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
-}
-
-tasks.register("clean", Delete::class) {
-    delete(rootProject.buildDir)
+plugins {
+    alias(libs.plugins.com.android.application) apply false
+    alias(libs.plugins.org.jetbrains.kotlin.android) apply false
+    alias(libs.plugins.com.google.services) apply false
+    alias(libs.plugins.hilt.gradle) apply false
+    alias(libs.plugins.firebase.crashlytics.gradle) apply false
+    alias(libs.plugins.android.library) apply false
+    id("com.google.devtools.ksp") version "2.0.0-1.0.24" apply false
 }

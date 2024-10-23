@@ -1,19 +1,29 @@
+plugins {
+    alias(libs.plugins.android.library)
+}
+
 apply {
     from("$rootDir/base-module.gradle")
 }
 
+android {
+    namespace = "com.orangeink.registration" // Only namespace is required
+}
+
+
 dependencies {
-    "implementation"(project(Modules.coreCommon))
-    "implementation"(project(Modules.coreDesign))
-    "implementation"(project(Modules.coreNetwork))
-    "implementation"(project(Modules.coreUtils))
+    "implementation"(project(":core:common"))
+    "implementation"(project(":core:design"))
+    "implementation"(project(":core:network"))
+    "implementation"(project(":core:utils"))
 
-    "implementation"(platform(Firebase.platform))
-    "implementation"(Firebase.auth)
+    "implementation"(libs.retrofit)
 
-    "implementation"(Core.appCompat)
-    "implementation"(Google.material)
+    "implementation"(platform(libs.firebase.platform))
+    "implementation"(libs.firebase.auth)
 
-    "implementation"(Retrofit.retrofit)
-    "implementation"(External.qrCode)
+    "implementation"(libs.app.compat)
+    "implementation"(libs.google.material)
+
+    "implementation"(libs.qrcode)
 }

@@ -1,21 +1,22 @@
 plugins {
-    id("com.android.application")
-    id("com.google.gms.google-services")
-    id("dagger.hilt.android.plugin")
-    id("com.google.firebase.crashlytics")
-
+    alias(libs.plugins.com.android.application)
+    alias(libs.plugins.com.google.services)
+    alias(libs.plugins.hilt.gradle)
+    alias(libs.plugins.firebase.crashlytics.gradle)
+    id("com.google.devtools.ksp")
     kotlin("android")
-    kotlin("kapt")
 }
 
 android {
-    compileSdk = ProjectConfig.compileSdk
+    namespace = "com.orangeink.techtrix"
+    compileSdk = 34
+
     defaultConfig {
-        applicationId = ProjectConfig.appId
-        minSdk = ProjectConfig.minSdk
-        targetSdk = ProjectConfig.targetSdk
-        versionCode = ProjectConfig.versionCode
-        versionName = ProjectConfig.versionName
+        applicationId = "com.orangeink.techtrix"
+        minSdk = 23
+        targetSdk = 34
+        versionCode = 13
+        versionName = "1.2.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -41,72 +42,73 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        isCoreLibraryDesugaringEnabled = true
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
-kapt {
-    correctErrorTypes = true
-}
-
 dependencies {
-    implementation(project(Modules.coreNetwork))
-    implementation(project(Modules.coreCommon))
-    implementation(project(Modules.coreDesign))
-    implementation(project(Modules.coreUtils))
+    coreLibraryDesugaring(libs.corelibrary.desugaring)
 
-    implementation(project(Modules.featureHome))
-    implementation(project(Modules.featureSearch))
-    implementation(project(Modules.featureRegistration))
-    implementation(project(Modules.featureNotifications))
-    implementation(project(Modules.featureCategory))
-    implementation(project(Modules.featureEvent))
-    implementation(project(Modules.featureProfile))
-    implementation(project(Modules.featureList))
-    implementation(project(Modules.featureLogin))
+    implementation(project(":core:network"))
+    implementation(project(":core:common"))
+    implementation(project(":core:design"))
+    implementation(project(":core:utils"))
 
-    implementation(Core.coreKtx)
-    implementation(Core.appCompat)
-    implementation(Core.constraintLayout)
-    implementation(Core.splashScreen)
+    implementation(project(":feature:home"))
+    implementation(project(":feature:search"))
+    implementation(project(":feature:registration"))
+    implementation(project(":feature:notifications"))
+    implementation(project(":feature:category"))
+    implementation(project(":feature:event"))
+    implementation(project(":feature:profile"))
+    implementation(project(":feature:list"))
+    implementation(project(":feature:login"))
 
-    implementation(Fragment.fragmentKtx)
+    implementation(libs.core.ktx)
+    implementation(libs.app.compat)
+    implementation(libs.constraint.layout)
+    implementation(libs.swiperefresh.layout)
+    implementation(libs.splashscreen)
 
-    implementation(Google.material)
+    implementation(libs.fragment)
+    implementation(libs.google.material)
 
-    implementation(Navigation.fragment)
-    implementation(Navigation.ui)
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
 
-    implementation(Coroutines.core)
-    implementation(Coroutines.android)
-    implementation(Coroutines.taskAwait)
+    implementation(libs.coroutines.core)
+    implementation(libs.coroutines.android)
+    implementation(libs.coroutines.play.services)
 
-    implementation(Lifecycle.liveData)
-    implementation(Lifecycle.viewModel)
-    implementation(Lifecycle.runtime)
-    implementation(Lifecycle.extension)
+    implementation(libs.lifecycle.viewmodel)
+    implementation(libs.lifecycle.livedata)
+    implementation(libs.lifecycle.runtime)
+    implementation(libs.lifecycle.extension)
 
-    implementation(Hilt.android)
-    kapt(Hilt.compiler)
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
 
-    implementation(Glide.glide)
-    kapt(Glide.glideCompiler)
+    implementation(libs.glide)
+    ksp(libs.glide.compiler)
 
-    implementation(platform(Firebase.platform))
-    implementation(Firebase.analytics)
-    implementation(Firebase.crashlytics)
-    implementation(Firebase.auth)
-    implementation(Firebase.messaging)
+    implementation(platform(libs.firebase.platform))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.messaging)
 
-    implementation(External.timber)
+    implementation(libs.timber)
 
-    implementation(Testing.junit4)
-    implementation(Testing.junitAndroidExt)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.espresso.core)
 }

@@ -1,15 +1,23 @@
+plugins {
+    alias(libs.plugins.android.library)
+}
+
 apply {
     from("$rootDir/base-module.gradle")
 }
 
+android {
+    namespace = "com.orangeink.search" // Only namespace is required
+}
+
 dependencies {
-    "implementation"(project(Modules.coreCommon))
-    "implementation"(project(Modules.coreDesign))
-    "implementation"(project(Modules.coreNetwork))
-    "implementation"(project(Modules.coreUtils))
+    "implementation"(project(":core:common"))
+    "implementation"(project(":core:design"))
+    "implementation"(project(":core:network"))
+    "implementation"(project(":core:utils"))
 
-    "implementation"(Core.appCompat)
-    "implementation"(Google.material)
+    "implementation"(libs.app.compat)
+    "implementation"(libs.google.material)
 
-    "implementation"(Retrofit.retrofit)
+    "implementation"(libs.retrofit)
 }

@@ -1,21 +1,31 @@
+plugins {
+    alias(libs.plugins.android.library)
+}
+
 apply {
     from("$rootDir/base-module.gradle")
 }
 
+android {
+    namespace = "com.orangeink.profile" // Only namespace is required
+}
+
+
 dependencies {
-    "implementation"(project(Modules.coreCommon))
-    "implementation"(project(Modules.coreDesign))
-    "implementation"(project(Modules.coreNetwork))
-    "implementation"(project(Modules.coreUtils))
+    "implementation"(project(":core:common"))
+    "implementation"(project(":core:design"))
+    "implementation"(project(":core:network"))
+    "implementation"(project(":core:utils"))
 
-    "implementation"(platform(Firebase.platform))
-    "implementation"(Firebase.auth)
-    "implementation"(Firebase.messaging)
+    "implementation"(libs.app.compat)
+    "implementation"(libs.swiperefresh.layout)
+    "implementation"(libs.google.material)
 
-    "implementation"(Core.appCompat)
-    "implementation"(Core.swipeRefresh)
-    "implementation"(Google.material)
+    "implementation"(libs.retrofit)
 
-    "implementation"(Retrofit.retrofit)
-    "implementation"(External.circleImageView)
+    "implementation"(platform(libs.firebase.platform))
+    "implementation"(libs.firebase.auth)
+    "implementation"(libs.firebase.messaging)
+
+    "implementation"(libs.circleimage.view)
 }

@@ -1,17 +1,26 @@
+plugins {
+    alias(libs.plugins.android.library)
+}
+
 apply {
     from("$rootDir/base-module.gradle")
 }
 
+android {
+    namespace = "com.orangeink.list" // Only namespace is required
+}
+
+
 dependencies {
-    "implementation"(project(Modules.coreCommon))
-    "implementation"(project(Modules.coreDesign))
-    "implementation"(project(Modules.coreNetwork))
-    "implementation"(project(Modules.coreUtils))
+    "implementation"(project(":core:common"))
+    "implementation"(project(":core:design"))
+    "implementation"(project(":core:network"))
+    "implementation"(project(":core:utils"))
 
-    "implementation"(Core.appCompat)
-    "implementation"(Core.swipeRefresh)
-    "implementation"(Google.material)
+    "implementation"(libs.app.compat)
+    "implementation"(libs.swiperefresh.layout)
+    "implementation"(libs.google.material)
 
-    "implementation"(Retrofit.retrofit)
-    "implementation"(External.roundedImageView)
+    "implementation"(libs.retrofit)
+    "implementation"(libs.roundedimage.view)
 }

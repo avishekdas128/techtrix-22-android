@@ -1,17 +1,25 @@
+plugins {
+    alias(libs.plugins.android.library)
+}
+
 apply {
     from("$rootDir/base-module.gradle")
 }
 
+android {
+    namespace = "com.orangeink.common" // Only namespace is required
+}
+
 dependencies {
-    "implementation"(project(Modules.coreNetwork))
-    "implementation"(project(Modules.coreDesign))
+    "implementation"(project(":core:network"))
+    "implementation"(project(":core:design"))
 
-    "implementation"(platform(Firebase.platform))
-    "implementation"(Firebase.auth)
+    "implementation"(platform(libs.firebase.platform))
+    "implementation"(libs.firebase.auth)
 
-    "implementation"(Core.appCompat)
-    "implementation"(Google.material)
+    "implementation"(libs.app.compat)
+    "implementation"(libs.google.material)
 
-    "implementation"(Moshi.moshi)
-    "kapt"(Moshi.codegen)
+    "implementation"(libs.moshi)
+    "ksp"(libs.moshi.codegen)
 }

@@ -1,17 +1,17 @@
-apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-parcelize'
 apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'com.google.devtools.ksp'
 
 android {
-    compileSdk ProjectConfig.compileSdk
+    compileSdk 34
+    namespace "com.orangeink"
 
     defaultConfig {
-        minSdk ProjectConfig.minSdk
-        targetSdk ProjectConfig.targetSdk
-        versionCode ProjectConfig.versionCode
-        versionName ProjectConfig.versionName
+        minSdk 23
+        targetSdk 34
+        versionCode 13
+        versionName "1.2.0"
 
         Properties properties = new Properties()
         if (rootProject.file("local.properties").exists()) {
@@ -22,10 +22,11 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
+
     buildTypes {
         release {
             ext.enableCrashlytics = true
-            minifyEnabled true
+            minifyEnabled false
             debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -35,37 +36,39 @@ android {
             debuggable true
         }
     }
+
     compileOptions {
         coreLibraryDesugaringEnabled true
 
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
+
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
+
     buildFeatures {
         viewBinding true
+        buildConfig true
     }
-}
-
-kapt {
-    correctErrorTypes true
 }
 
 dependencies {
-    implementation External.timber
+    coreLibraryDesugaring libs.corelibrary.desugaring
+    implementation libs.timber
 
-    implementation Fragment.fragmentKtx
+    implementation libs.fragment
 
-    implementation Lifecycle.liveData
-    implementation Lifecycle.viewModel
-    implementation Lifecycle.runtime
-    implementation Lifecycle.extension
+    implementation libs.lifecycle.viewmodel
+    implementation libs.lifecycle.livedata
+    implementation libs.lifecycle.runtime
+    implementation libs.lifecycle.extension
 
-    implementation Hilt.android
-    kapt Hilt.compiler
+    implementation libs.hilt.android
+    ksp libs.hilt.compiler
 
-    implementation Testing.junit4
-    implementation Testing.junitAndroidExt
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.test.ext.junit
+    androidTestImplementation libs.espresso.core
 }

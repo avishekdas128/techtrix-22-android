@@ -1,8 +1,17 @@
+plugins {
+    alias(libs.plugins.android.library)
+}
+
 apply {
     from("$rootDir/base-module.gradle")
 }
 
+android {
+    namespace = "com.orangeink.utils" // Only namespace is required
+}
+
+
 dependencies {
-    "implementation"(Glide.glide)
-    "kapt"(Glide.glideCompiler)
+    "implementation"(libs.glide)
+    "ksp"(libs.glide.compiler)
 }

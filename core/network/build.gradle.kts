@@ -1,13 +1,22 @@
+plugins {
+    alias(libs.plugins.android.library)
+}
+
 apply {
     from("$rootDir/base-module.gradle")
 }
 
-dependencies {
-    "implementation"(Retrofit.retrofit)
-    "implementation"(Retrofit.moshiConverter)
-    "implementation"(Retrofit.okHttp)
-    "implementation"(Retrofit.okHttpLoggingInterceptor)
+android {
+    namespace = "com.orangeink.network" // Only namespace is required
+}
 
-    "implementation"(Moshi.moshi)
-    "kapt"(Moshi.codegen)
+
+dependencies {
+    "implementation"(libs.retrofit)
+    "implementation"(libs.retrofit.converter)
+    "implementation"(libs.okhttp)
+    "implementation"(libs.okhttp.logging)
+
+    "implementation"(libs.moshi)
+    "ksp"(libs.moshi.codegen)
 }

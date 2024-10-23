@@ -2,6 +2,7 @@ package com.orangeink.home
 
 import android.content.Context
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,7 +29,8 @@ import com.orangeink.network.model.HomeResponse
 import com.orangeink.utils.tryCast
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Locale
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -70,7 +72,9 @@ class HomeFragment : Fragment() {
         try {
             val pInfo =
                 requireActivity().packageManager.getPackageInfo(requireActivity().packageName, 0)
-            versionCode = pInfo.longVersionCode.toInt()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                versionCode = pInfo.longVersionCode.toInt()
+            }
         } catch (e: PackageManager.NameNotFoundException) {
             e.printStackTrace()
         }
